@@ -1,0 +1,14 @@
+﻿  stdafx.cpp
+  ViewTree.cpp
+  SortowaniaView.cpp
+  SortowaniaDoc.cpp
+  Sortowania.cpp
+  PropertiesWnd.cpp
+  OutputWnd.cpp
+  MainFrm.cpp
+  FileView.cpp
+  ClassView.cpp
+  ChildFrm.cpp
+  Generating Code...
+  Sortowania.vcxproj -> C:\STUDIA_SEMESTR_6\ProgramowanieWindowsAAA\Projekty\ProgramowanieWindows\1_Sortowania\Sortowania\Debug\Sortowania.exe
+  Sortowania.vcxproj -> C:\STUDIA_SEMESTR_6\ProgramowanieWindowsAAA\Projekty\ProgramowanieWindows\1_Sortowania\Sortowania\Debug\Sortowania.pdb (Partial PDB)
