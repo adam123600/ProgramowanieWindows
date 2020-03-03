@@ -12,6 +12,8 @@
 #include "SortowaniaDoc.h"
 #include "SortowaniaView.h"
 
+#include "ColorRect.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -60,6 +62,8 @@ void CSortowaniaView::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: add draw code for native data here
+
+//	CRect* s;
 }
 
 

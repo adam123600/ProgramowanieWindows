@@ -1,0 +1,107 @@
+Sortowania: Wybieranie, Wstawianie, Polowkowe, Bablekowe, Szybkie, Stogowe
+ 
+1. Wykresy maja byc skalowane w pionie ( realizacja tylko w OnDraw() bez WM_SIZE
+Nalezy wyrysowac pozioma siatke ( 20 poziomych linii ) - linie w srodku napisow czasow.
+Mozna zalozyc ze najmniejszy czas maksymalny to 40 milisek
+Maxymlany czas ( prostokat co do wysokosci ) ma byc mniejszy od maksymalnej wysokosci wykresu - maximum
+na sakli pionwej wykresu ma byc podzielne przez 20
+ 
+2. Moze byc ta sama szerokosc prostokatow rysowanych wzgledem srodka nazwy sortowania - przyjac sensowna
+wartosc aby wykresy nie byly zbyt blisko siebie
+ 
+3. Wykreowac Font dla nazw i dla czasow ( rozne )
+ 
+4. Przyciski na toolbarze: do sortowania wszystkich, do sortowan prostych i do szybkich
+ 
+5. Do pomiaru czasu uzyc funkcji ::GetTickCout()
+ 
+6. Nazwy sortowan zapisane maja byc w zasobach i stamtad pobierane
+Szerokosc prostokatow taka sama,
+maja byc rysowane wzgledem srodka napisu ( srodek prostokata to srodek tekstu )
+//
+Prostokaty moga byc szersze byleby byly odstepy ( sensownie dobrac )
+//
+Uzyc ladnych kolorow pastelowych, ma byc kolorowo- LGBT :-)
+//
+wykrowac fonty - pokaze dzisiaj na wykladzie :-)
+fonty dla nazw i dla czasow
+//
+przyciski na toolbarze - na wykladzie powie jak sie obsluguje przyciski na toolbarze
+1 ) przycisk do wszystkich
+2 ) przycisk do prostych
+3 ) przycisk do szybkich
+//
+tablice dynbamiczne - new i delete
+int* t = new int [100]
+delete []t; // tak sie usuwa tablice!!!
+//
+pomiar czasu: ::GetTickCout() - funkcja api windowsowego
+//
+nazwy sortowan maja byc umieszczone w zasobach i stamtad maja byc pobierane
+jak sie obsluguje zasoby - pokaze na wykladzie
+
+
+/////////////////////////
+
+
+w programie ma wystapic klasa kolorowego prostokata
+ 
+CColorRect - pochodna od klasy CRect
+ 
+klasa dziedziczy od klasy prostokata
+ 
+konstruktory:
+klasy pomocnicze - powie na wykladzie
+maja byc 4 konstruktory
+ 
+destruktor
+ 
+konstruktoryu
+1) domyslny ( CRect* pRect = NULL, int penWidth = 0, COLOREF penColor = BLACK, COLOREF bkgColor = BLACK );
+2) stala referencja, reszta param te same dla 2 3 4
+3) do prostokata stala do dwoch punktow
+4) do punktu i rozmiaru stala
+ 
+ 
+publiczne metody:
+void PaintColorRect (CDC* pDC ); / rysuje
+void setAttr ( int penWidth = 0, COLOREF penColor = BLACK, COLOREF bkgColor = BLACK ) ; ustaiwa atrybuty
+jak sa wykreowane piora to trzeba je kreowac i kasowac
+SOLID_COLOR
+ 
+CPen* getRectPen() const; zwraca pioro
+CBrush getRectBrush() const; zwraca pedzel
+ 
+private:
+// void initAttr() // jeszcze nie wie czy potrzebne
+void createAttr(int penWidth, COLOREF penColor, COLOREF bkgColor );
+ 
+ 
+privater:
+CPen* m_pPen;
+CBrush* m_pBrush;
+
+// *********************************************
+// *********************************************
+
+
+#pragma once
+
+#include <Rect.hpp>
+
+#define BLACK RGB(0, 0, 0)
+
+class CColorRect : public CRect
+{
+public:
+	// konstruktory
+	CColorRect(CRect* pRect = NULL, int penWidth = 0, COLORREF penColor = BLACK, COLORREF bkgColor = BLACK); // pRect wskaznik
+	CColorRect(CRect& pRect, int penWidth = 0, COLORREF penColor = BLACK, COLORREF bkgColor = BLACK); // pRect referencja
+	CColorRect(const CPoint& LeftTop, const CPoint& RightBottom,
+		int penWidth = 0, COLORREF penColor = BLACK, COLORREF bkgColor = BLACK); // punkty: lewy gorny rog oraz prawy dolny rog
+	CColorRect(const CPoint& LeftTop, const CSize& size,
+		int penWidth = 0, COLORREF penColor = BLACK, COLORREF bkgColor = BLACK); // punkt oraz wymiary
+
+	//destruktor
+	~CColorRect();
+};
