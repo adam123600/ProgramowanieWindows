@@ -9,7 +9,7 @@ public:
 	CColorRect( CRect* pRect = NULL, int penWidth = 0, COLORREF penColor = BLACK, COLORREF bkgColor = BLACK);
 	CColorRect(const CRect& pRect, int penWidth = 0, COLORREF penColor = BLACK, COLORREF bkgColor = BLACK);
 	CColorRect(const CPoint& LeftTop, const CPoint& RightBottom, int penWidth = 0, COLORREF penColor = BLACK, COLORREF bkgColor = BLACK);
-	CColorRect(const CPoint& pRect, const CSize& size, int penWidth = 0, COLORREF penColor = BLACK, COLORREF bkgColor = BLACK);
+	CColorRect(const CPoint& LeftTop, const CSize& size, int penWidth = 0, COLORREF penColor = BLACK, COLORREF bkgColor = BLACK);
 	
 	~CColorRect();
 
@@ -21,7 +21,7 @@ public:
 	CBrush* getRectBrush() const; // zwraca pedzel
 
 private:
-	void initAttr();
+	//void initAttr(); // jeszcze nie wie czy potrzebne
 	void createAttr(int penWidth, COLORREF penColor, COLORREF bkgColor);
 
 private:

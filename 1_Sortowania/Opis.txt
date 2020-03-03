@@ -81,27 +81,3 @@ privater:
 CPen* m_pPen;
 CBrush* m_pBrush;
 
-// *********************************************
-// *********************************************
-
-
-#pragma once
-
-#include <Rect.hpp>
-
-#define BLACK RGB(0, 0, 0)
-
-class CColorRect : public CRect
-{
-public:
-	// konstruktory
-	CColorRect(CRect* pRect = NULL, int penWidth = 0, COLORREF penColor = BLACK, COLORREF bkgColor = BLACK); // pRect wskaznik
-	CColorRect(CRect& pRect, int penWidth = 0, COLORREF penColor = BLACK, COLORREF bkgColor = BLACK); // pRect referencja
-	CColorRect(const CPoint& LeftTop, const CPoint& RightBottom,
-		int penWidth = 0, COLORREF penColor = BLACK, COLORREF bkgColor = BLACK); // punkty: lewy gorny rog oraz prawy dolny rog
-	CColorRect(const CPoint& LeftTop, const CSize& size,
-		int penWidth = 0, COLORREF penColor = BLACK, COLORREF bkgColor = BLACK); // punkt oraz wymiary
-
-	//destruktor
-	~CColorRect();
-};

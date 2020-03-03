@@ -18,6 +18,8 @@
 #define new DEBUG_NEW
 #endif
 
+#define RED RGB(255, 0, 0)
+#define GREEN RGB(0, 255, 0)
 
 // CSortowaniaView
 
@@ -54,7 +56,7 @@ BOOL CSortowaniaView::PreCreateWindow(CREATESTRUCT& cs)
 
 // CSortowaniaView drawing
 
-void CSortowaniaView::OnDraw(CDC* /*pDC*/)
+void CSortowaniaView::OnDraw(CDC* pDC)
 {
 	CSortowaniaDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -62,8 +64,11 @@ void CSortowaniaView::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: add draw code for native data here
+	/*CRect r1(50, 50, 500, 500);
+	CColorRect* colorRect = new CColorRect(&r1, 2, RED, GREEN);
+	colorRect->PaintColorRect(pDC);*/
 
-//	CRect* s;
+	rysowanieSiatki(pDC);
 }
 
 
@@ -129,3 +134,16 @@ CSortowaniaDoc* CSortowaniaView::GetDocument() const // non-debug version is inl
 
 
 // CSortowaniaView message handlers
+
+void CSortowaniaView::rysowanieSiatki(CDC* pDC)
+{
+	CPen* pen = new CPen(PS_SOLID, 2, BLACK);
+
+	GetClientRect(this->m_pClientRect);
+
+	pDC->SelectObject(pen);
+	//pDC->MoveTo( m_pClientRect->, 780);
+	//pDC->MoveTo(m_pClientRect->TopLeft + 20, m_pClientRect->BottomRight + 20);
+	
+	pDC->LineTo(5000, 780);
+}
