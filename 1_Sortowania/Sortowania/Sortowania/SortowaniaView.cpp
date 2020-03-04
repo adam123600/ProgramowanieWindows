@@ -12,7 +12,12 @@
 #include "SortowaniaDoc.h"
 #include "SortowaniaView.h"
 
+
 #include "ColorRect.h"
+#include "CoordinateSystem.h"
+
+#include <iostream>
+#include <utility>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -39,11 +44,12 @@ END_MESSAGE_MAP()
 CSortowaniaView::CSortowaniaView()
 {
 	// TODO: add construction code here
-
+	this->m_pClientRect = new CRect();
 }
 
 CSortowaniaView::~CSortowaniaView()
 {
+	delete this->m_pClientRect;
 }
 
 BOOL CSortowaniaView::PreCreateWindow(CREATESTRUCT& cs)
@@ -67,6 +73,19 @@ void CSortowaniaView::OnDraw(CDC* pDC)
 	/*CRect r1(50, 50, 500, 500);
 	CColorRect* colorRect = new CColorRect(&r1, 2, RED, GREEN);
 	colorRect->PaintColorRect(pDC);*/
+
+	//rysowanieSiatki(pDC);
+
+
+	
+	//GetWindowRect(this->m_pClientRect);
+	/*CRect* ASD = new CRect();
+
+	GetClientRect(ASD);
+	CRect r1(50, 50, ASD->right * 0.6, ASD->bottom * 0.7);
+	CRect r2(50, 50, 200, 200);
+	pDC->Rectangle(&r1);*/
+	//CColorRect* cRect = new CColorRect(&r1, 2, RED, GREEN);
 
 	rysowanieSiatki(pDC);
 }
@@ -137,13 +156,31 @@ CSortowaniaDoc* CSortowaniaView::GetDocument() const // non-debug version is inl
 
 void CSortowaniaView::rysowanieSiatki(CDC* pDC)
 {
-	CPen* pen = new CPen(PS_SOLID, 2, BLACK);
-
-	GetClientRect(this->m_pClientRect);
-
-	pDC->SelectObject(pen);
-	//pDC->MoveTo( m_pClientRect->, 780);
-	//pDC->MoveTo(m_pClientRect->TopLeft + 20, m_pClientRect->BottomRight + 20);
+	GetClientRect(m_pClientRect);
 	
-	pDC->LineTo(5000, 780);
+	//std::pair<int, int> LT(m_pClientRect->left, m_pClientRect->top);
+	std::pair<int, int> LT(20, 20);
+	std::pair<int, int> MP( 20, 0.8 * m_pClientRect->bottom);
+	std::pair<int, int> BR(0.8 * m_pClientRect->right, 0.8 * m_pClientRect->bottom);
+
+	/*std::pair<int, int> LT( 0.5 * m_pClientRect->right,  0.5 * m_pClientRect->bottom);
+	std::pair<int, int> MP(0.5 * m_pClientRect->right,  0.5 * m_pClientRect->bottom);
+	std::pair<int, int> BR( 0.5 * m_pClientRect->right,  0.5 * m_pClientRect->bottom);
+*/
+
+	if (MP.second < 20)
+	{
+		MP.second = 20;
+		BR.second = 20;
+	}
+
+	if (BR.first < 200)
+	{
+		BR.first = 200;
+	}
+	
+	CoordinateSystem* cs = new CoordinateSystem(LT, MP, BR);
+
+	cs->paintCoordinateSystem(pDC);
+
 }

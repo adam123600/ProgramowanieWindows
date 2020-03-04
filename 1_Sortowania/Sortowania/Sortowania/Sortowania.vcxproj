@@ -188,6 +188,7 @@
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="ColorRect.h" />
+    <ClInclude Include="CoordinateSystem.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="OutputWnd.h" />
@@ -204,6 +205,7 @@
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ClassView.cpp" />
     <ClCompile Include="ColorRect.cpp" />
+    <ClCompile Include="CoordinateSystem.cpp" />
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
