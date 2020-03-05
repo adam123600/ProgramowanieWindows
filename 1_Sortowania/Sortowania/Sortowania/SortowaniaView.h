@@ -36,7 +36,7 @@ public:
 #endif
 
 public:
-	void rysowanieSiatki(CDC* pDC);
+	void drawCoordinateSystem(CDC* pDC);
 
 protected:
 

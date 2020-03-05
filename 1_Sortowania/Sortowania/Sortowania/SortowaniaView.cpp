@@ -25,6 +25,7 @@
 
 #define RED RGB(255, 0, 0)
 #define GREEN RGB(0, 255, 0)
+#define SIZE_LINES 20
 
 // CSortowaniaView
 
@@ -87,7 +88,7 @@ void CSortowaniaView::OnDraw(CDC* pDC)
 	pDC->Rectangle(&r1);*/
 	//CColorRect* cRect = new CColorRect(&r1, 2, RED, GREEN);
 
-	rysowanieSiatki(pDC);
+	drawCoordinateSystem(pDC);
 }
 
 
@@ -154,19 +155,13 @@ CSortowaniaDoc* CSortowaniaView::GetDocument() const // non-debug version is inl
 
 // CSortowaniaView message handlers
 
-void CSortowaniaView::rysowanieSiatki(CDC* pDC)
+void CSortowaniaView::drawCoordinateSystem(CDC* pDC)
 {
 	GetClientRect(m_pClientRect);
 	
-	//std::pair<int, int> LT(m_pClientRect->left, m_pClientRect->top);
 	std::pair<int, int> LT(20, 20);
-	std::pair<int, int> MP( 20, 0.8 * m_pClientRect->bottom);
-	std::pair<int, int> BR(0.8 * m_pClientRect->right, 0.8 * m_pClientRect->bottom);
-
-	/*std::pair<int, int> LT( 0.5 * m_pClientRect->right,  0.5 * m_pClientRect->bottom);
-	std::pair<int, int> MP(0.5 * m_pClientRect->right,  0.5 * m_pClientRect->bottom);
-	std::pair<int, int> BR( 0.5 * m_pClientRect->right,  0.5 * m_pClientRect->bottom);
-*/
+	std::pair<int, int> MP( 20, 0.9 * m_pClientRect->bottom);
+	std::pair<int, int> BR(0.8 * m_pClientRect->right, 0.9 * m_pClientRect->bottom);
 
 	if (MP.second < 20)
 	{
@@ -178,9 +173,33 @@ void CSortowaniaView::rysowanieSiatki(CDC* pDC)
 	{
 		BR.first = 200;
 	}
-	
-	CoordinateSystem* cs = new CoordinateSystem(LT, MP, BR);
 
-	cs->paintCoordinateSystem(pDC);
+	std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> lines;
+
+	for (int i = 0; i < SIZE_LINES - 1; i++)
+	{
+
+		std::pair<std::pair<int, int>, std::pair<int, int>> s;
+		s.first.first = 20;
+		s.first.second = m_pClientRect->bottom * i / SIZE_LINES;
+		s.second.first = 0.8 * m_pClientRect->right;
+		s.second.second = i * m_pClientRect->bottom / SIZE_LINES;
+		
+		if (s.second.first < 200)
+		{
+			s.second.first = 200;
+		}
+
+		if (s.first.second < 20)
+		{
+			s.first.second = 20;
+			s.second.second = 20;
+		}
+
+		lines.push_back(s);
+	}
+
+	CoordinateSystem* cs = new CoordinateSystem(LT, MP, BR, lines);
+	cs->paintCoordinateSystemWithLines(pDC);
 
 }
