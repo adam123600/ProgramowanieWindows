@@ -62,3 +62,10 @@ CBrush* CColorRect::getRectBrush() const
 {
 	return this->m_pBrush;
 }
+
+void CColorRect::drawObject(CDC* pDC)
+{
+	pDC->SelectObject(this->m_pBrush);
+
+	pDC->Rectangle(this);
+}

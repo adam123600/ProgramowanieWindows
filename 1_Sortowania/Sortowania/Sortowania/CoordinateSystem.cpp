@@ -90,3 +90,18 @@ void CoordinateSystem::paintCoordinateSystemWithLines(CDC* pDC) // uklad + linie
 		pDC->LineTo(lines2[i].second.first, lines2[i].second.second);
 	}
 }
+
+void CoordinateSystem::drawObject(CDC* pDC)
+{
+	// uklad wspolrzednych
+	pDC->MoveTo(this->leftTopPoint.first, this->leftTopPoint.second);
+	pDC->LineTo(this->midPoint.first, this->midPoint.second);
+	pDC->LineTo(this->bottomRightPoint.first, this->bottomRightPoint.second);
+
+	// kreski okreslajace skale
+	for (int i = 0; i < lines2.size(); i++)
+	{
+		pDC->MoveTo(lines2[i].first.first, lines2[i].first.second);
+		pDC->LineTo(lines2[i].second.first, lines2[i].second.second);
+	}
+}

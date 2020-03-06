@@ -1,13 +1,15 @@
 ﻿  SortowaniaView.cpp
-c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(185): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(171): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(212): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(216): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
 c:\program files (x86)\microsoft visual studio 14.0\vc\include\utility(172): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(163): note: see reference to function template instantiation 'std::pair<int,int>::pair<int,double,void,0>(_Other1 &&,_Other2 &&) noexcept' being compiled
+  c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(149): note: see reference to function template instantiation 'std::pair<int,int>::pair<int,double,void,0>(_Other1 &&,_Other2 &&) noexcept' being compiled
           with
           [
               _Other1=int,
               _Other2=double
           ]
-  c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(163): note: see reference to function template instantiation 'std::pair<int,int>::pair<int,double,void,0>(_Other1 &&,_Other2 &&) noexcept' being compiled
+  c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(149): note: see reference to function template instantiation 'std::pair<int,int>::pair<int,double,void,0>(_Other1 &&,_Other2 &&) noexcept' being compiled
           with
           [
               _Other1=int,

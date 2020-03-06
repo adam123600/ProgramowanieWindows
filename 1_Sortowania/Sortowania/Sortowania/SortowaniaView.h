@@ -37,6 +37,7 @@ public:
 
 public:
 	void drawCoordinateSystem(CDC* pDC);
+	void drawRectangle(CDC* pDC);
 
 protected:
 

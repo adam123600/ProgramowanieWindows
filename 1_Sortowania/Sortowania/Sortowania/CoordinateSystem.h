@@ -4,8 +4,9 @@
 #include <iostream>
 #include <utility>
 #include <vector>
+#include "Interface.h"
 
-class CoordinateSystem
+class CoordinateSystem : public ObjectToDraw
 {
 
 
@@ -25,6 +26,7 @@ public:
 public:
 	void paintCoordinateSystem(CDC* pDC); // funkcja rysujaca uklad
 	void paintCoordinateSystemWithLines(CDC* pDC); // uklad + linie
+	void drawObject(CDC* pDC) override;
 
 
 private:

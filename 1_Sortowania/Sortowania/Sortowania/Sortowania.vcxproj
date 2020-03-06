@@ -190,6 +190,7 @@
     <ClInclude Include="ColorRect.h" />
     <ClInclude Include="CoordinateSystem.h" />
     <ClInclude Include="FileView.h" />
+    <ClInclude Include="Interface.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="PropertiesWnd.h" />

@@ -71,24 +71,10 @@ void CSortowaniaView::OnDraw(CDC* pDC)
 		return;
 
 	// TODO: add draw code for native data here
-	/*CRect r1(50, 50, 500, 500);
-	CColorRect* colorRect = new CColorRect(&r1, 2, RED, GREEN);
-	colorRect->PaintColorRect(pDC);*/
-
-	//rysowanieSiatki(pDC);
-
-
-	
-	//GetWindowRect(this->m_pClientRect);
-	/*CRect* ASD = new CRect();
-
-	GetClientRect(ASD);
-	CRect r1(50, 50, ASD->right * 0.6, ASD->bottom * 0.7);
-	CRect r2(50, 50, 200, 200);
-	pDC->Rectangle(&r1);*/
-	//CColorRect* cRect = new CColorRect(&r1, 2, RED, GREEN);
 
 	drawCoordinateSystem(pDC);
+	drawRectangle(pDC);
+	
 }
 
 
@@ -200,6 +186,41 @@ void CSortowaniaView::drawCoordinateSystem(CDC* pDC)
 	}
 
 	CoordinateSystem* cs = new CoordinateSystem(LT, MP, BR, lines);
-	cs->paintCoordinateSystemWithLines(pDC);
+//	cs->paintCoordinateSystemWithLines(pDC);
 
+	cs->drawObject(pDC);
+
+}
+
+void CSortowaniaView::drawRectangle(CDC* pDC)
+{
+	GetClientRect(m_pClientRect);
+
+	//CRect r1(0.8 * m_pClientRect->right, 5, 2, 200);
+	POINT temp;
+	/*temp.x = 40;
+	temp.y = 100 + 0.45 * m_pClientRect->bottom;*/
+	
+	POINT temp2;
+	/*temp2.x = 60;
+	temp2.y = 0.9 * m_pClientRect->bottom;*/
+
+	
+	//for (int i = 0; i < SIZE_LINES - 1; i++)
+	//{
+		temp.x = 40;
+		temp.y = 200 - ((m_pClientRect->bottom * 0.1 ) );
+		//temp.y = 200;
+
+		temp2.x = 60;
+		temp2.y = 0.9 * m_pClientRect->bottom;
+	
+	CRect r1(temp, temp2);
+	
+	CColorRect* r1C = new CColorRect(&r1, 2, RED, GREEN);
+	
+	
+	
+	
+	r1C->drawObject(pDC);
 }
