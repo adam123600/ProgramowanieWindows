@@ -11,7 +11,7 @@
 
 #include "SortowaniaDoc.h"
 #include "SortowaniaView.h"
-
+#include "Sort.h"
 
 #include "ColorRect.h"
 #include "CoordinateSystem.h"
@@ -26,6 +26,8 @@
 #define RED RGB(255, 0, 0)
 #define GREEN RGB(0, 255, 0)
 #define SIZE_LINES 20
+#define MAX_ELEMENTS_TAB 20000
+#define SIZE_OF_SORTING 1
 
 // CSortowaniaView
 
@@ -46,11 +48,22 @@ CSortowaniaView::CSortowaniaView()
 {
 	// TODO: add construction code here
 	this->m_pClientRect = new CRect();
+
+	this->tabRandomNumbers = new int[MAX_ELEMENTS_TAB];
+	this->tabSorted = new int[MAX_ELEMENTS_TAB];
+
+	this->sortingTimes = new int[SIZE_OF_SORTING];
+	flag = 3;
 }
 
 CSortowaniaView::~CSortowaniaView()
 {
 	delete this->m_pClientRect;
+	delete[] this->tabRandomNumbers;
+	delete[] this->sortingTimes;
+	delete[] this->tabSorted;
+
+	randomNumbersTab();
 }
 
 BOOL CSortowaniaView::PreCreateWindow(CREATESTRUCT& cs)
@@ -145,51 +158,26 @@ void CSortowaniaView::drawCoordinateSystem(CDC* pDC)
 {
 	GetClientRect(m_pClientRect);
 	
-	std::pair<int, int> LT(20, 20);
-	std::pair<int, int> MP( 20, 0.9 * m_pClientRect->bottom);
-	std::pair<int, int> BR(0.8 * m_pClientRect->right, 0.9 * m_pClientRect->bottom);
-
-	if (MP.second < 20)
-	{
-		MP.second = 20;
-		BR.second = 20;
-	}
-
-	if (BR.first < 200)
-	{
-		BR.first = 200;
-	}
+	std::pair<int, int> LT(20, 0.1 * m_pClientRect->Height());
+	std::pair<int, int> MP( 20, 0.9 * m_pClientRect->Height());
+	std::pair<int, int> BR(700, 0.9 * m_pClientRect->Height());
 
 	std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> lines;
 
-	for (int i = 0; i < SIZE_LINES - 1; i++)
+	for (int i = 0; i < SIZE_LINES + 1; i++)
 	{
-
 		std::pair<std::pair<int, int>, std::pair<int, int>> s;
 		s.first.first = 20;
-		s.first.second = m_pClientRect->bottom * i / SIZE_LINES;
-		s.second.first = 0.8 * m_pClientRect->right;
-		s.second.second = i * m_pClientRect->bottom / SIZE_LINES;
-		
-		if (s.second.first < 200)
-		{
-			s.second.first = 200;
-		}
-
-		if (s.first.second < 20)
-		{
-			s.first.second = 20;
-			s.second.second = 20;
-		}
-
+		s.first.second = (0.8 * m_pClientRect->Height() / SIZE_LINES) * i + 0.1 * m_pClientRect->Height();
+		s.second.first = 700;
+		s.second.second = (0.8 * m_pClientRect->Height() / SIZE_LINES) * i + 0.1 * m_pClientRect->Height();
+	
 		lines.push_back(s);
 	}
 
 	CoordinateSystem* cs = new CoordinateSystem(LT, MP, BR, lines);
-//	cs->paintCoordinateSystemWithLines(pDC);
 
 	cs->drawObject(pDC);
-
 }
 
 void CSortowaniaView::drawRectangle(CDC* pDC)
@@ -219,8 +207,57 @@ void CSortowaniaView::drawRectangle(CDC* pDC)
 	
 	CColorRect* r1C = new CColorRect(&r1, 2, RED, GREEN);
 	
-	
+
+	// ***********************************
+
+
+	POINT t3;
+	POINT t4;
+
+	// wywolanie sorta
+	/*DWORD startTime = GetTickCount();
+	BubbleSort(this->tabRandomNumbers, MAX_ELEMENTS_TAB);
+	DWORD endTime = GetTickCount();
+	*/
+	//endTime = endTime - startTime;
+	/*if (!flag)
+	{
+		randomNumbersTab();
+		sort();
+		flag = 1;
+	}*/
+
+	t3.x = 80;
+	//t3.y = this->sortingTimes[0] + ((m_pClientRect->bottom * 0.9));
+	t3.y = 200;
+	t4.x = 100;
+	t4.y = 0.9 * m_pClientRect->bottom;
+	CRect r2(t3, t4);
+	CColorRect* r2C = new CColorRect(&r2, 2, RED, GREEN);
+	r2C->drawObject(pDC);
 	
 	
 	r1C->drawObject(pDC);
+}
+
+void CSortowaniaView::randomNumbersTab()
+{
+	srand(time(NULL));
+
+	for (int i = 0; i < MAX_ELEMENTS_TAB; i++)
+		this->tabRandomNumbers[i] = rand();
+}
+
+void CSortowaniaView::sort()
+{
+	memcpy(this->tabSorted, this->tabRandomNumbers, MAX_ELEMENTS_TAB);
+
+	DWORD startTime = GetTickCount();
+	BubbleSort(tabSorted, MAX_ELEMENTS_TAB);
+	DWORD endTime = GetTickCount();
+
+	endTime = endTime - startTime;
+
+	this->sortingTimes[0] = endTime;
+
 }

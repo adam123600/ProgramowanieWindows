@@ -38,6 +38,9 @@ public:
 public:
 	void drawCoordinateSystem(CDC* pDC);
 	void drawRectangle(CDC* pDC);
+	void randomNumbersTab();
+	void sort();
+
 
 protected:
 
@@ -50,6 +53,10 @@ protected:
 
 public:
 	CRect* m_pClientRect;
+	int* tabRandomNumbers;
+	int* tabSorted;
+	int* sortingTimes;
+	int flag;
 };
 
 #ifndef _DEBUG  // debug version in SortowaniaView.cpp
