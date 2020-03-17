@@ -87,8 +87,11 @@ void CSortowaniaView::OnDraw(CDC* pDC)
 	// TODO: add draw code for native data here
 
 	drawCoordinateSystem(pDC);
-	drawRectangle(pDC);
+	int temp = pDoc->getBubbleSortTime();
+	drawRectangle(pDC, temp);
 	
+
+//	drawRectangle(pDC);
 }
 
 
@@ -158,7 +161,7 @@ CSortowaniaDoc* CSortowaniaView::GetDocument() const // non-debug version is inl
 void CSortowaniaView::drawCoordinateSystem(CDC* pDC)
 {
 	GetClientRect(m_pClientRect);
-	
+
 	std::pair<int, int> LT(20, 0.1 * m_pClientRect->Height());
 	std::pair<int, int> MP( 20, 0.9 * m_pClientRect->Height());
 	std::pair<int, int> BR(1250, 0.9 * m_pClientRect->Height());
@@ -176,12 +179,12 @@ void CSortowaniaView::drawCoordinateSystem(CDC* pDC)
 		lines.push_back(s);
 	}
 
-	CoordinateSystem* cs = new CoordinateSystem(LT, MP, BR, lines);
+	std::unique_ptr<CoordinateSystem> cs{ new CoordinateSystem(LT, MP, BR, lines) };
 
 	cs->drawObject(pDC);
 }
 
-void CSortowaniaView::drawRectangle(CDC* pDC)
+void CSortowaniaView::drawRectangle(CDC* pDC, const int& height)
 {
 	GetClientRect(m_pClientRect);
 
@@ -191,20 +194,23 @@ void CSortowaniaView::drawRectangle(CDC* pDC)
 	
 	temp.x = 40;
 	temp.y = 0.2 * m_pClientRect->Height();
+	//temp.y = height / 200000;
 
 	temp2.x = 60;
 	temp2.y = 0.9 * m_pClientRect->Height();
+	//temp2.y = height;
 	
 	CRect r1(temp, temp2);
 	
 	std::unique_ptr<CColorRect> r1C{ new CColorRect(&r1, 2, RED, GREEN) };
 
 	r1C->drawObject(pDC);
+
 }
 
 void CSortowaniaView::randomNumbersTab()
 {
-	srand(time(NULL));
+	//srand(time(NULL));
 
 	//for (int i = 0; i < MAX_ELEMENTS_TAB-5; i++) // jakis bug
 	//	this->tabRandomNumbers[i] = rand();

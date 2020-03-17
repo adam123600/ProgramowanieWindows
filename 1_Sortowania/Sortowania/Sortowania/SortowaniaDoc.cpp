@@ -12,6 +12,14 @@
 #include "SortowaniaDoc.h"
 
 #include <propkey.h>
+#include <memory>
+
+// ****
+
+#include "Sort.h"
+
+#define LICZBA_ELEMENTOW 20000
+// ****
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -31,6 +39,9 @@ END_MESSAGE_MAP()
 CSortowaniaDoc::CSortowaniaDoc()
 {
 	// TODO: add one-time construction code here
+
+	//std::unique_ptr<Sorty> sorty{ new Sorty() };
+	srand(time(NULL));
 
 }
 
@@ -138,8 +149,65 @@ void CSortowaniaDoc::Dump(CDumpContext& dc) const
 // CSortowaniaDoc commands
 
 
+unsigned int CSortowaniaDoc::getBubbleSortTime()
+{
+	return bubbleSortTime;
+}
+
+unsigned int CSortowaniaDoc::getInsertionSortTime()
+{
+	return insertionSortTime;
+}
+
+unsigned int CSortowaniaDoc::getHalfSortTime()
+{
+	return halfSortTime;
+}
+
+unsigned int CSortowaniaDoc::getSelectionSortTime()
+{
+	return selectionSortTime;
+}
+
+unsigned int CSortowaniaDoc::getQuickSortTime()
+{
+	return quickSortTime;
+}
+
+unsigned int CSortowaniaDoc::getHeapSortTime()
+{
+	return heapSortTime;
+}
+
+void CSortowaniaDoc::randomNumbers(int* pTab, const int& size)
+{
+	
+	for (int i = 0; i < size; i++)
+		pTab[i] = std::rand() % size;
+}
+
 void CSortowaniaDoc::OnSortowaniaProste()
 {
-	// TODO: Add your command handler code here
-	AfxMessageBox(_T("ASDASDASD"));
+	int tab[LICZBA_ELEMENTOW];
+	int tabCopy[LICZBA_ELEMENTOW];
+
+	randomNumbers(tab, LICZBA_ELEMENTOW);
+
+	Sort(tabCopy, tab, BubbleSort, LICZBA_ELEMENTOW, bubbleSortTime);
+	Sort(tabCopy, tab, InsertionSort, LICZBA_ELEMENTOW, insertionSortTime);
+	Sort(tabCopy, tab, HalfSort, LICZBA_ELEMENTOW, halfSortTime);
+	Sort(tabCopy, tab, SelectionSort, LICZBA_ELEMENTOW, selectionSortTime);
+
+	/*CString s;
+	s.Format(L"%d %d\n%d %d", bubbleSortTime*(-1), insertionSortTime*(-1),
+		halfSortTime*(-1), selectionSortTime*(-1));
+	AfxMessageBox(s);*/
+	UpdateAllViews(NULL);
 }
+
+
+
+
+
+
+

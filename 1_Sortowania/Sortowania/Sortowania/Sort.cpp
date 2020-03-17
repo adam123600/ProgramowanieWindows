@@ -359,3 +359,17 @@ void CopySerie(int* pTab, int* tmp, int nSize, int* i, int* ix)
 
 	} while (!end);
 }
+
+void CopyTab(int* pTabCopy, int* pTabOrginal, int nSize)
+{
+	memcpy(pTabCopy, pTabOrginal, sizeof(int)*nSize);
+}
+
+void Sort(int* pTabO, int* pTabI, pFSort sort, int nSize, unsigned int& sortTime)
+{
+	CopyTab(pTabO, pTabI, nSize);
+	unsigned int startSort = ::GetTickCount();
+	sort(pTabO, nSize); // sortowanie
+	unsigned int endSort = ::GetTickCount();
+	sortTime = startSort - endSort;
+}

@@ -1,6 +1,9 @@
 #pragma once
 
 #include "stdafx.h"
+#include <stdlib.h>
+
+typedef void(pFSort)(int*, int);
 
 void BubbleSort(int* pTab, int nSize); // sortowanie bšbelkowe
 void InsertionSort(int* pTab, int nSize); // sortowanie przez wstawianie
@@ -13,6 +16,6 @@ void QuickSort(int* pTab, int l, int r); // sortowanie szybkie
 void Sort(int* pTab, int nSize); // sortowanie przez laczenie naturalne
 
 // 
-void RandomNumber(int* pTab, int nSize); // zapelnianie losowymi
+//void RandomNumber(int* pTab, int nSize); // zapelnianie losowymi
 void CopyTab(int* pTabCopy, int* pTabOrginal, int nSize); // kopiowanie tablicy
-//void Sort(int* pTabO, int* pTabI, pFSort sort, int nSize); // funcja sortujaca
+void Sort(int* pTabO, int* pTabI, pFSort sort, int nSize, unsigned int& sortTime); // funcja sortujaca

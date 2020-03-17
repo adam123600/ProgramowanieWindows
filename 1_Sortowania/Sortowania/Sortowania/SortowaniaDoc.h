@@ -4,7 +4,11 @@
 
 
 #pragma once
-
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <ctime>
+#include "Sort.h"
 
 class CSortowaniaDoc : public CDocument
 {
@@ -47,4 +51,23 @@ protected:
 #endif // SHARED_HANDLERS
 public:
 	afx_msg void OnSortowaniaProste();
+
+public:
+	unsigned int getBubbleSortTime();
+	unsigned int getInsertionSortTime();
+	unsigned int getHalfSortTime();
+	unsigned int getSelectionSortTime();
+	unsigned int getQuickSortTime();
+	unsigned int getHeapSortTime();
+
+private:
+	void randomNumbers(int* pTab, const int& size);
+
+private:
+	unsigned int bubbleSortTime;
+	unsigned int insertionSortTime;
+	unsigned int halfSortTime;
+	unsigned int selectionSortTime;
+	unsigned int quickSortTime;
+	unsigned int heapSortTime;
 };

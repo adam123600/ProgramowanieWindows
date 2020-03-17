@@ -1,2 +1,20 @@
-﻿  Sortowania.vcxproj -> C:\STUDIA_SEMESTR_6\ProgramowanieWindowsAAA\Projekty\ProgramowanieWindows\1_Sortowania\Sortowania\Debug\Sortowania.exe
+﻿  SortowaniaView.cpp
+c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(175): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(177): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(196): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(200): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\utility(172): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(165): note: see reference to function template instantiation 'std::pair<int,int>::pair<int,double,void,0>(_Other1 &&,_Other2 &&) noexcept' being compiled
+          with
+          [
+              _Other1=int,
+              _Other2=double
+          ]
+  c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(165): note: see reference to function template instantiation 'std::pair<int,int>::pair<int,double,void,0>(_Other1 &&,_Other2 &&) noexcept' being compiled
+          with
+          [
+              _Other1=int,
+              _Other2=double
+          ]
+  Sortowania.vcxproj -> C:\STUDIA_SEMESTR_6\ProgramowanieWindowsAAA\Projekty\ProgramowanieWindows\1_Sortowania\Sortowania\Debug\Sortowania.exe
   Sortowania.vcxproj -> C:\STUDIA_SEMESTR_6\ProgramowanieWindowsAAA\Projekty\ProgramowanieWindows\1_Sortowania\Sortowania\Debug\Sortowania.pdb (Partial PDB)
