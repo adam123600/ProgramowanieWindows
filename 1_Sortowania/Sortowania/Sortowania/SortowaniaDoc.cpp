@@ -22,6 +22,7 @@
 IMPLEMENT_DYNCREATE(CSortowaniaDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(CSortowaniaDoc, CDocument)
+	ON_COMMAND(ID_SORTOWANIA_PROSTE, &CSortowaniaDoc::OnSortowaniaProste)
 END_MESSAGE_MAP()
 
 
@@ -135,3 +136,10 @@ void CSortowaniaDoc::Dump(CDumpContext& dc) const
 
 
 // CSortowaniaDoc commands
+
+
+void CSortowaniaDoc::OnSortowaniaProste()
+{
+	// TODO: Add your command handler code here
+	AfxMessageBox(_T("ASDASDASD"));
+}

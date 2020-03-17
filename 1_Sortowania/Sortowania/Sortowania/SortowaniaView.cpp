@@ -161,7 +161,7 @@ void CSortowaniaView::drawCoordinateSystem(CDC* pDC)
 	
 	std::pair<int, int> LT(20, 0.1 * m_pClientRect->Height());
 	std::pair<int, int> MP( 20, 0.9 * m_pClientRect->Height());
-	std::pair<int, int> BR(700, 0.9 * m_pClientRect->Height());
+	std::pair<int, int> BR(1250, 0.9 * m_pClientRect->Height());
 
 	std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> lines;
 
@@ -170,7 +170,7 @@ void CSortowaniaView::drawCoordinateSystem(CDC* pDC)
 		std::pair<std::pair<int, int>, std::pair<int, int>> s;
 		s.first.first = 20;
 		s.first.second = (0.8 * m_pClientRect->Height() / SIZE_LINES) * i + 0.1 * m_pClientRect->Height();
-		s.second.first = 700;
+		s.second.first = 1250;
 		s.second.second = (0.8 * m_pClientRect->Height() / SIZE_LINES) * i + 0.1 * m_pClientRect->Height();
 	
 		lines.push_back(s);
@@ -206,8 +206,8 @@ void CSortowaniaView::randomNumbersTab()
 {
 	srand(time(NULL));
 
-	for (int i = 0; i < MAX_ELEMENTS_TAB; i++)
-		this->tabRandomNumbers[i] = rand();
+	//for (int i = 0; i < MAX_ELEMENTS_TAB-5; i++) // jakis bug
+	//	this->tabRandomNumbers[i] = rand();
 }
 
 void CSortowaniaView::sort()

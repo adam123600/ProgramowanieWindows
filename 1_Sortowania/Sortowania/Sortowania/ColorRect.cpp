@@ -41,11 +41,17 @@ void CColorRect::PaintColorRect(CDC* pDC) // funkcja rysujaca
 	// rysowanie prostokata pDC->Rectangle( &CRect)
 
 	// narysowac prostokat
+	/*pDC->SelectObject(this->m_pBrush);
+	pDC->Rectangle(this);*/
 
+	CPen* pOldPen = pDC->SelectObject(m_pPen);
+	CBrush* pOldBrush = pDC->SelectObject(m_pBrush);
 
-	pDC->SelectObject(this->m_pBrush);
-	
+	pDC->SelectObject(m_pBrush);
 	pDC->Rectangle(this);
+
+	pDC->SelectObject(pOldPen);
+	pDC->SelectObject(pOldBrush);
 }
 
 void CColorRect::setAttr(int penWidth, COLORREF penColor, COLORREF bkgColor) // ustawienie parametrow pedzla
