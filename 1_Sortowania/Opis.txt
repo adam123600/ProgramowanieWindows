@@ -81,3 +81,6 @@ privater:
 CPen* m_pPen;
 CBrush* m_pBrush;
 
+
+//// 
+czasy sortowan zapisac w dokumencie

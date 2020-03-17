@@ -50,7 +50,9 @@ void CColorRect::PaintColorRect(CDC* pDC) // funkcja rysujaca
 
 void CColorRect::setAttr(int penWidth, COLORREF penColor, COLORREF bkgColor) // ustawienie parametrow pedzla
 {
-
+	m_pPen->DeleteObject();
+	m_pBrush->DeleteObject();
+	createAttr(penWidth, penColor, bkgColor);
 }
 
 CPen* CColorRect::getRectPen() const
@@ -61,6 +63,12 @@ CPen* CColorRect::getRectPen() const
 CBrush* CColorRect::getRectBrush() const
 {
 	return this->m_pBrush;
+}
+
+void CColorRect::createAttr(int penWidth, COLORREF penColor, COLORREF bkgColor)
+{
+	m_pPen->CreatePen(PS_SOLID, penWidth, penColor);
+	m_pBrush->CreateSolidBrush(bkgColor);
 }
 
 void CColorRect::drawObject(CDC* pDC)

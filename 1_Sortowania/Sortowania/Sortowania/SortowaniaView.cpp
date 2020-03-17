@@ -18,6 +18,7 @@
 
 #include <iostream>
 #include <utility>
+#include <memory>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -184,59 +185,20 @@ void CSortowaniaView::drawRectangle(CDC* pDC)
 {
 	GetClientRect(m_pClientRect);
 
-	//CRect r1(0.8 * m_pClientRect->right, 5, 2, 200);
 	POINT temp;
-	/*temp.x = 40;
-	temp.y = 100 + 0.45 * m_pClientRect->bottom;*/
 	
 	POINT temp2;
-	/*temp2.x = 60;
-	temp2.y = 0.9 * m_pClientRect->bottom;*/
-
 	
-	//for (int i = 0; i < SIZE_LINES - 1; i++)
-	//{
-		temp.x = 40;
-		temp.y = 200 - ((m_pClientRect->bottom * 0.1 ) );
-		//temp.y = 200;
+	temp.x = 40;
+	temp.y = 0.2 * m_pClientRect->Height();
 
-		temp2.x = 60;
-		temp2.y = 0.9 * m_pClientRect->bottom;
+	temp2.x = 60;
+	temp2.y = 0.9 * m_pClientRect->Height();
 	
 	CRect r1(temp, temp2);
 	
-	CColorRect* r1C = new CColorRect(&r1, 2, RED, GREEN);
-	
+	std::unique_ptr<CColorRect> r1C{ new CColorRect(&r1, 2, RED, GREEN) };
 
-	// ***********************************
-
-
-	POINT t3;
-	POINT t4;
-
-	// wywolanie sorta
-	/*DWORD startTime = GetTickCount();
-	BubbleSort(this->tabRandomNumbers, MAX_ELEMENTS_TAB);
-	DWORD endTime = GetTickCount();
-	*/
-	//endTime = endTime - startTime;
-	/*if (!flag)
-	{
-		randomNumbersTab();
-		sort();
-		flag = 1;
-	}*/
-
-	t3.x = 80;
-	//t3.y = this->sortingTimes[0] + ((m_pClientRect->bottom * 0.9));
-	t3.y = 200;
-	t4.x = 100;
-	t4.y = 0.9 * m_pClientRect->bottom;
-	CRect r2(t3, t4);
-	CColorRect* r2C = new CColorRect(&r2, 2, RED, GREEN);
-	r2C->drawObject(pDC);
-	
-	
 	r1C->drawObject(pDC);
 }
 
