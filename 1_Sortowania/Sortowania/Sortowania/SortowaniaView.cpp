@@ -96,8 +96,7 @@ void CSortowaniaView::OnDraw(CDC* pDC)
 //	drawRectangle(pDC);
 	if (pDoc->getBasicSortsStatus())
 	{
-		drawRectangle(pDC, 185);
-
+		drawRectangle(pDC, 100, 50, RED);
 	}
 }
 
@@ -197,7 +196,7 @@ void CSortowaniaView::drawCoordinateSystem(CDC* pDC)
 	cs->paintCoordinateSystemWithLines(pDC, maxSortTime);
 }
 
-void CSortowaniaView::drawRectangle(CDC* pDC, const int& height)
+void CSortowaniaView::drawRectangle(CDC* pDC, const int& sortTime, int positionOnX, COLORREF color)
 {
 	//GetClientRect(m_pClientRect);
 
@@ -222,24 +221,64 @@ void CSortowaniaView::drawRectangle(CDC* pDC, const int& height)
 
 	// **********************************************************************************
 
-	double proportionOnXAxis = 1 - height / maxSortTime; 
+	//double proportionOnXAxis = 1 - sortTime / maxSortTime; 
 
-	POINT temp1;
-	POINT temp2;
+	//POINT temp1;
+	//POINT temp2;
 
-	temp1.x = 190;
-	
-	temp1.y = (0.9*m_pClientRect->Height() - maxSortTime) * proportionOnXAxis;
+	//temp1.x = 190;
+	//temp1.y = (bottomCoordinateSystem.y - topCoordinateSystem.y) * proportionOnXAxis + topCoordinateSystem.y - 300;
+	//
+	//temp2.x = 240;
+	//temp2.y = bottomCoordinateSystem.y;
 
-	temp2.x = 240;
-	temp2.y = 0.9 * m_pClientRect->Height();
+	//
 
-	CRect r1(temp1, temp2);
-	CColorRect* cr1 = new CColorRect(&r1, 2, RED, GREEN);
+	//CRect r1(temp1, temp2);
+	//CColorRect* cr1 = new CColorRect(&r1, 2, RED, GREEN);
+
+	////m_pRect->setAttr(0, BLACK, color);
+	//cr1->drawObject(pDC);
+
+	//double proportionOnXAxis = 1 - sortTime / maxSortTime;
+	//
+	//POINT p1;
+	//POINT p2;
+
+	//int RECNTAGLE_WIDTH = 40;
+
+	//p1.x = bottomCoordinateSystem.x + 20 + positionOnX;
+	//p1.y = (bottomCoordinateSystem.y - topCoordinateSystem.y) * proportionOnXAxis + topCoordinateSystem.y - 400;
+	//p2.x = bottomCoordinateSystem.x + 20 + 40 + positionOnX;
+	//p2.y = bottomCoordinateSystem.y;
+
+	//CRect r1(p1, p2);
+	//CColorRect cr1(&r1, 2, RED, GREEN);
+
+	//cr1.drawObject(pDC);
+
 
 	//m_pRect->setAttr(0, BLACK, color);
 	//m_pRect->PaintRect(pDC);
+	//sortTime = 0;
+
+	// *********************************************************************************************
 	
+	POINT p1;
+	POINT p2;
+	p1.x = bottomCoordinateSystem.x + 20;
+	//p1.y = 1 - sortTime / maxSortTime * ( bottomCoordinateSystem.y - 100 -  0.1*m_pClientRect->Height());
+	//p1.y = 2;
+	//p1.y = topCoordinateSystem.y - sortTime * 0.9 * m_pClientRect->Height() / maxSortTime;
+	//p1.y = bottomCoordinateSystem.y - sortTime * 0.9 * m_pClientRect->Height() / maxSortTime;
+	p1.y = 300 / maxSortTime + sortTime;
+	p2.x = bottomCoordinateSystem.x + 40;
+	p2.y = bottomCoordinateSystem.y;
+
+	CRect r1(p1, p2);
+	CColorRect cr1(&r1, 2, RED, GREEN);
+
+	cr1.drawObject(pDC);
 }
 
 void CSortowaniaView::randomNumbersTab()

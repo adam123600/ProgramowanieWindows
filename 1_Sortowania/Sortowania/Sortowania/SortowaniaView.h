@@ -37,7 +37,7 @@ public:
 
 public:
 	void drawCoordinateSystem(CDC* pDC);
-	void drawRectangle(CDC* pDC, const int& height);
+	void drawRectangle(CDC* pDC, const int& height, int positionOnX, COLORREF color);
 	void randomNumbersTab();
 	void sort();
 

@@ -1,25 +1,20 @@
 ﻿  SortowaniaView.cpp
-c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(179): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(181): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(187): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(189): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(232): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
-c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(235): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(178): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(180): warning C4244: '=': conversion from 'double' to 'LONG', possible loss of data
+c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(186): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(188): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 c:\program files (x86)\microsoft visual studio 14.0\vc\include\utility(172): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(172): note: see reference to function template instantiation 'std::pair<int,int>::pair<int,double,void,0>(_Other1 &&,_Other2 &&) noexcept' being compiled
+  c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(171): note: see reference to function template instantiation 'std::pair<int,int>::pair<int,double,void,0>(_Other1 &&,_Other2 &&) noexcept' being compiled
           with
           [
               _Other1=int,
               _Other2=double
           ]
-  c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(172): note: see reference to function template instantiation 'std::pair<int,int>::pair<int,double,void,0>(_Other1 &&,_Other2 &&) noexcept' being compiled
+  c:\studia_semestr_6\programowaniewindowsaaa\projekty\programowaniewindows\1_sortowania\sortowania\sortowania\sortowaniaview.cpp(171): note: see reference to function template instantiation 'std::pair<int,int>::pair<int,double,void,0>(_Other1 &&,_Other2 &&) noexcept' being compiled
           with
           [
               _Other1=int,
               _Other2=double
           ]
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  Sortowania.cpp
   Sortowania.vcxproj -> C:\STUDIA_SEMESTR_6\ProgramowanieWindowsAAA\Projekty\ProgramowanieWindows\1_Sortowania\Sortowania\Debug\Sortowania.exe
   Sortowania.vcxproj -> C:\STUDIA_SEMESTR_6\ProgramowanieWindowsAAA\Projekty\ProgramowanieWindows\1_Sortowania\Sortowania\Debug\Sortowania.pdb (Partial PDB)
