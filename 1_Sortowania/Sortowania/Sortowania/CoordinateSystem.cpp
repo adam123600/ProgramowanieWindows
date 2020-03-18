@@ -76,16 +76,27 @@ void CoordinateSystem::paintCoordinateSystem(CDC* pDC) // funkcja rysujaca uklad
 	pDC->LineTo(this->bottomRightPoint.first, this->bottomRightPoint.second);
 }
 
-void CoordinateSystem::paintCoordinateSystemWithLines(CDC* pDC) // uklad + linie
+void CoordinateSystem::paintCoordinateSystemWithLines(CDC* pDC, const unsigned int& maxSortTime) // uklad + linie
 {
 	// uklad wspolrzednych
 	pDC->MoveTo(this->leftTopPoint.first, this->leftTopPoint.second);
 	pDC->LineTo(this->midPoint.first, this->midPoint.second);
 	pDC->LineTo(this->bottomRightPoint.first, this->bottomRightPoint.second);
 
+	int temp = maxSortTime;
+	
+	//temp = 1250;
+
 	// kreski okreslajace skale
-	for (int i = 0; i < lines2.size(); i++)
+	CString s;
+
+
+	for (int i = 0, j = temp; i < lines2.size(); i++, j -= temp/20)
 	{
+		//pDC->MoveTo(lines2[i].first.first - 20, lines2[i].first.second);
+		s.Format(L"%d", static_cast<int>(j*(-1)/10) * 10);
+		pDC->TextOutW(lines2[i].first.first - 60, lines2[i].first.second - 8, s);
+
 		pDC->MoveTo(lines2[i].first.first, lines2[i].first.second);
 		pDC->LineTo(lines2[i].second.first, lines2[i].second.second);
 	}
@@ -99,9 +110,16 @@ void CoordinateSystem::drawObject(CDC* pDC)
 	pDC->LineTo(this->bottomRightPoint.first, this->bottomRightPoint.second);
 
 	// kreski okreslajace skale
-	for (int i = 0; i < lines2.size(); i++)
+	for (int i = 0, j = lines2.size()-1; i < lines2.size(); i++, j--)
 	{
+		//pDC->MoveTo(lines2[i].first.first - 20, lines2[i].first.second);
+		CString s;
+		s.Format(L"%d", j * 200);
+		pDC->TextOutW(lines2[i].first.first - 60, lines2[i].first.second - 8, s);
+		
+
 		pDC->MoveTo(lines2[i].first.first, lines2[i].first.second);
 		pDC->LineTo(lines2[i].second.first, lines2[i].second.second);
 	}
+
 }

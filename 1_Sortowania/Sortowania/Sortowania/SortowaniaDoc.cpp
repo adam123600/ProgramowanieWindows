@@ -42,7 +42,14 @@ CSortowaniaDoc::CSortowaniaDoc()
 
 	//std::unique_ptr<Sorty> sorty{ new Sorty() };
 	srand(time(NULL));
+	maxSortTime = 0;
+	bubbleSortTime = 0;
+	insertionSortTime = 0;
+	halfSortTime = 0;
+	selectionSortTime = 0;
+	heapSortTime = 0;
 
+	basicSorts = false;
 }
 
 CSortowaniaDoc::~CSortowaniaDoc()
@@ -184,6 +191,11 @@ unsigned int CSortowaniaDoc::getMaxSortTime()
 	return maxSortTime;
 }
 
+bool CSortowaniaDoc::getBasicSortsStatus()
+{
+	return basicSorts;
+}
+
 void CSortowaniaDoc::randomNumbers(int* pTab, const int& size)
 {
 	
@@ -209,6 +221,7 @@ void CSortowaniaDoc::OnSortowaniaProste()
 	s.Format(L"%d %d\n%d %d", bubbleSortTime*(-1), insertionSortTime*(-1),
 		halfSortTime*(-1), selectionSortTime*(-1));
 	AfxMessageBox(s);*/
+	basicSorts = true;
 	UpdateAllViews(NULL);
 }
 

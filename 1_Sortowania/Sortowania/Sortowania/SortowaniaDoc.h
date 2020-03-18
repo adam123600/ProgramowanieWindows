@@ -62,6 +62,8 @@ public:
 
 	unsigned int getMaxSortTime();
 
+	bool getBasicSortsStatus();
+
 private:
 	void randomNumbers(int* pTab, const int& size);
 
@@ -74,4 +76,6 @@ private:
 	unsigned int heapSortTime;
 
 	unsigned int maxSortTime;
+
+	bool basicSorts;
 };

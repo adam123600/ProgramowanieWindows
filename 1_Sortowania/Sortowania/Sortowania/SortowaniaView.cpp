@@ -27,7 +27,7 @@
 #define RED RGB(255, 0, 0)
 #define GREEN RGB(0, 255, 0)
 #define SIZE_LINES 20
-#define MAX_ELEMENTS_TAB 20000
+#define MAX_ELEMENTS_TAB 500
 #define SIZE_OF_SORTING 1
 
 // CSortowaniaView
@@ -64,7 +64,7 @@ CSortowaniaView::~CSortowaniaView()
 	delete[] this->sortingTimes;
 	delete[] this->tabSorted;
 
-	randomNumbersTab();
+	//randomNumbersTab();
 }
 
 BOOL CSortowaniaView::PreCreateWindow(CREATESTRUCT& cs)
@@ -89,11 +89,16 @@ void CSortowaniaView::OnDraw(CDC* pDC)
 	this->maxSortTime = pDoc->getMaxSortTime();
 
 	drawCoordinateSystem(pDC);
-	int temp = pDoc->getBubbleSortTime();
-	drawRectangle(pDC, temp);
+	//int temp = pDoc->getBubbleSortTime();
+	//drawRectangle(pDC, temp);
 	
 
 //	drawRectangle(pDC);
+	if (pDoc->getBasicSortsStatus())
+	{
+		drawRectangle(pDC, 185);
+
+	}
 }
 
 
@@ -164,16 +169,21 @@ void CSortowaniaView::drawCoordinateSystem(CDC* pDC)
 {
 	GetClientRect(m_pClientRect);
 
-	std::pair<int, int> LT(20, 0.1 * m_pClientRect->Height());
-	std::pair<int, int> MP( 20, 0.9 * m_pClientRect->Height());
+	std::pair<int, int> LT( 100, 0.1 * m_pClientRect->Height());
+	std::pair<int, int> MP( 100, 0.9 * m_pClientRect->Height());
 	std::pair<int, int> BR(1250, 0.9 * m_pClientRect->Height());
 
 	std::vector<std::pair<std::pair<int, int>, std::pair<int, int>>> lines;
 
+	topCoordinateSystem.x = 100;
+	topCoordinateSystem.y = 0.1 * m_pClientRect->Height();
+	bottomCoordinateSystem.x = 100;
+	bottomCoordinateSystem.y = 0.9 * m_pClientRect->Height();
+
 	for (int i = 0; i < SIZE_LINES + 1; i++)
 	{
 		std::pair<std::pair<int, int>, std::pair<int, int>> s;
-		s.first.first = 20;
+		s.first.first = 100;
 		s.first.second = (0.8 * m_pClientRect->Height() / SIZE_LINES) * i + 0.1 * m_pClientRect->Height();
 		s.second.first = 1250;
 		s.second.second = (0.8 * m_pClientRect->Height() / SIZE_LINES) * i + 0.1 * m_pClientRect->Height();
@@ -183,31 +193,53 @@ void CSortowaniaView::drawCoordinateSystem(CDC* pDC)
 
 	std::unique_ptr<CoordinateSystem> cs{ new CoordinateSystem(LT, MP, BR, lines) };
 
-	cs->drawObject(pDC);
+	//cs->drawObject(pDC);
+	cs->paintCoordinateSystemWithLines(pDC, maxSortTime);
 }
 
 void CSortowaniaView::drawRectangle(CDC* pDC, const int& height)
 {
-	GetClientRect(m_pClientRect);
+	//GetClientRect(m_pClientRect);
 
-	POINT temp;
-	
+	//POINT temp;
+	////
+	//POINT temp2;
+	////
+	//temp.x = 40;
+	//temp.y = 0.2 * m_pClientRect->Height();
+	//////temp.y = height / 200000;
+
+	//temp2.x = 60;
+	//temp2.y = 0.9 * m_pClientRect->Height();
+	//////temp2.y = height;
+	//
+	//CRect r1(temp, temp2);
+	//
+	//std::unique_ptr<CColorRect> r1C{ new CColorRect(&r1, 2, RED, GREEN) };
+
+	//r1C->drawObject(pDC);
+
+
+	// **********************************************************************************
+
+	double proportionOnXAxis = 1 - height / maxSortTime; 
+
+	POINT temp1;
 	POINT temp2;
-	
-	temp.x = 40;
-	temp.y = 0.2 * m_pClientRect->Height();
-	//temp.y = height / 200000;
 
-	temp2.x = 60;
+	temp1.x = 190;
+	
+	temp1.y = (0.9*m_pClientRect->Height() - maxSortTime) * proportionOnXAxis;
+
+	temp2.x = 240;
 	temp2.y = 0.9 * m_pClientRect->Height();
-	//temp2.y = height;
-	
-	CRect r1(temp, temp2);
-	
-	std::unique_ptr<CColorRect> r1C{ new CColorRect(&r1, 2, RED, GREEN) };
 
-	r1C->drawObject(pDC);
+	CRect r1(temp1, temp2);
+	CColorRect* cr1 = new CColorRect(&r1, 2, RED, GREEN);
 
+	//m_pRect->setAttr(0, BLACK, color);
+	//m_pRect->PaintRect(pDC);
+	
 }
 
 void CSortowaniaView::randomNumbersTab()

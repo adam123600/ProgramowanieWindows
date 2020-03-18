@@ -25,7 +25,7 @@ public:
 
 public:
 	void paintCoordinateSystem(CDC* pDC); // funkcja rysujaca uklad
-	void paintCoordinateSystemWithLines(CDC* pDC); // uklad + linie
+	void paintCoordinateSystemWithLines(CDC* pDC, const unsigned int& maxSortTime); // uklad + linie
 	void drawObject(CDC* pDC) override;
 
 

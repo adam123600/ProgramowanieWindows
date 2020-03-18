@@ -60,6 +60,9 @@ public:
 
 public:
 	unsigned int maxSortTime;
+
+	POINT topCoordinateSystem;
+	POINT bottomCoordinateSystem;
 };
 
 #ifndef _DEBUG  // debug version in SortowaniaView.cpp
