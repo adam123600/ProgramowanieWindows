@@ -57,6 +57,9 @@ public:
 	int* tabSorted;
 	int* sortingTimes;
 	int flag;
+
+public:
+	unsigned int maxSortTime;
 };
 
 #ifndef _DEBUG  // debug version in SortowaniaView.cpp

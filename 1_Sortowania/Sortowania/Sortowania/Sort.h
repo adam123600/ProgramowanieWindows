@@ -18,4 +18,5 @@ void Sort(int* pTab, int nSize); // sortowanie przez laczenie naturalne
 // 
 //void RandomNumber(int* pTab, int nSize); // zapelnianie losowymi
 void CopyTab(int* pTabCopy, int* pTabOrginal, int nSize); // kopiowanie tablicy
-void Sort(int* pTabO, int* pTabI, pFSort sort, int nSize, unsigned int& sortTime); // funcja sortujaca
+void Sort(int* pTabO, int* pTabI, pFSort sort, int nSize,
+	unsigned int& sortTime, unsigned int& maxSortTime); // funcja sortujaca

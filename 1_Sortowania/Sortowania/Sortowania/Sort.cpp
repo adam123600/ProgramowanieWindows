@@ -365,11 +365,14 @@ void CopyTab(int* pTabCopy, int* pTabOrginal, int nSize)
 	memcpy(pTabCopy, pTabOrginal, sizeof(int)*nSize);
 }
 
-void Sort(int* pTabO, int* pTabI, pFSort sort, int nSize, unsigned int& sortTime)
+void Sort(int* pTabO, int* pTabI, pFSort sort, int nSize, unsigned int& sortTime, unsigned int& maxSortTime)
 {
 	CopyTab(pTabO, pTabI, nSize);
 	unsigned int startSort = ::GetTickCount();
 	sort(pTabO, nSize); // sortowanie
 	unsigned int endSort = ::GetTickCount();
 	sortTime = startSort - endSort;
+
+	if (sortTime > maxSortTime)
+		maxSortTime = sortTime;
 }

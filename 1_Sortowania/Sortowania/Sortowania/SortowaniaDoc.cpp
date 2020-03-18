@@ -179,6 +179,11 @@ unsigned int CSortowaniaDoc::getHeapSortTime()
 	return heapSortTime;
 }
 
+unsigned int CSortowaniaDoc::getMaxSortTime()
+{
+	return maxSortTime;
+}
+
 void CSortowaniaDoc::randomNumbers(int* pTab, const int& size)
 {
 	
@@ -193,10 +198,12 @@ void CSortowaniaDoc::OnSortowaniaProste()
 
 	randomNumbers(tab, LICZBA_ELEMENTOW);
 
-	Sort(tabCopy, tab, BubbleSort, LICZBA_ELEMENTOW, bubbleSortTime);
-	Sort(tabCopy, tab, InsertionSort, LICZBA_ELEMENTOW, insertionSortTime);
-	Sort(tabCopy, tab, HalfSort, LICZBA_ELEMENTOW, halfSortTime);
-	Sort(tabCopy, tab, SelectionSort, LICZBA_ELEMENTOW, selectionSortTime);
+	maxSortTime = 0;
+
+	Sort(tabCopy, tab, BubbleSort, LICZBA_ELEMENTOW, bubbleSortTime, maxSortTime);
+	Sort(tabCopy, tab, InsertionSort, LICZBA_ELEMENTOW, insertionSortTime, maxSortTime);
+	Sort(tabCopy, tab, HalfSort, LICZBA_ELEMENTOW, halfSortTime, maxSortTime);
+	Sort(tabCopy, tab, SelectionSort, LICZBA_ELEMENTOW, selectionSortTime, maxSortTime);
 
 	/*CString s;
 	s.Format(L"%d %d\n%d %d", bubbleSortTime*(-1), insertionSortTime*(-1),

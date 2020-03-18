@@ -60,6 +60,8 @@ public:
 	unsigned int getQuickSortTime();
 	unsigned int getHeapSortTime();
 
+	unsigned int getMaxSortTime();
+
 private:
 	void randomNumbers(int* pTab, const int& size);
 
@@ -70,4 +72,6 @@ private:
 	unsigned int selectionSortTime;
 	unsigned int quickSortTime;
 	unsigned int heapSortTime;
+
+	unsigned int maxSortTime;
 };

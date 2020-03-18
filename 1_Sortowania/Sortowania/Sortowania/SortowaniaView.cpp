@@ -86,6 +86,8 @@ void CSortowaniaView::OnDraw(CDC* pDC)
 
 	// TODO: add draw code for native data here
 
+	this->maxSortTime = pDoc->getMaxSortTime();
+
 	drawCoordinateSystem(pDC);
 	int temp = pDoc->getBubbleSortTime();
 	drawRectangle(pDC, temp);
