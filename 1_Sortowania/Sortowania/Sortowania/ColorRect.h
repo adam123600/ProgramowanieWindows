@@ -26,3 +26,4 @@ private:
 	CBrush* m_pBrush;
 };
 
+/// ssss
