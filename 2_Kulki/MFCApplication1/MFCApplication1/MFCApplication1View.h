@@ -4,6 +4,9 @@
 
 #pragma once
 
+#include "Ball.h"
+#include <memory>
+#include <vector>
 
 class CMFCApplication1View : public CView
 {
@@ -44,6 +47,9 @@ public:
 
 private:
 	bool m_bAnimacja;
+
+	std::vector<CBall*> m_pBalls;
+	
 };
 
 #ifndef _DEBUG  // debug version in MFCApplication1View.cpp

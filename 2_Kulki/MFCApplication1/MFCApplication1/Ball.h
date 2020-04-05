@@ -24,6 +24,8 @@ public:
 	void SetOffset(int nOffx, int nOffy); // ustawia wektory ruchu
 	void SetBoundRect(const CRect& pRect); // ustawia prostokat ograniczajacy ruch - obszar klienta
 
+	CPen* getBallPen();
+	CBrush* getBallBrush();
 
 private:
 	inline void CreateObjects(COLORREF BallColor = BLACK); 
@@ -35,10 +37,10 @@ private:
 	void InitObjects(COLORREF BallColor = BLACK); // przydziela pamiec i wykreowac
 
 private:
-	//CPen* m_pBallPen;
-	//CBrush* m_pBallBrush;
-	std::unique_ptr<CPen> m_pBallPen;
-	std::unique_ptr<CBrush> m_pBallBrush;
+	CPen* m_pBallPen;
+	CBrush* m_pBallBrush;
+	//std::unique_ptr<CPen> m_pBallPen;
+	//std::unique_ptr<CBrush> m_pBallBrush;
 
 	// zmodyfikowac konstruktory o te nowe parametry
 	int m_nOffX;

@@ -51,7 +51,7 @@ BOOL CMFCApplication1View::PreCreateWindow(CREATESTRUCT& cs)
 
 // CMFCApplication1View drawing
 
-void CMFCApplication1View::OnDraw(CDC* /*pDC*/)
+void CMFCApplication1View::OnDraw(CDC* pDC)
 {
 	CMFCApplication1Doc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
@@ -59,6 +59,17 @@ void CMFCApplication1View::OnDraw(CDC* /*pDC*/)
 		return;
 
 	// TODO: add draw code for native data here
+
+	
+	//CBall* mBall = new CBall(5, 5, 100, 100, RGB(0, 255, 0));
+	CBall b1(5, 5, 100, 100, RGB(255, 0, 0));
+	m_pBalls.push_back(&b1);
+	
+
+	CPen* pOldPen = pDC->SelectObject(m_pBalls[0]->getBallPen()); 
+	CBrush* pOldBrush = pDC->SelectObject(m_pBalls[0]->getBallBrush());
+
+	pDC->Ellipse(m_pBalls[0]);
 }
 
 
