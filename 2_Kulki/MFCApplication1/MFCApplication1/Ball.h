@@ -18,8 +18,8 @@ public:
 	inline void SetColor(COLORREF color); // ustaw kolor ( Delete + Create ), nie usuwac tu pamieci
 	inline void SetBallSize(const CRect& pRect); // ustaw rozmiar ( referencja do recta )
 	void PaintBall(CDC* pDC); // narysuj kulke
-	
-	/////
+
+							  /////
 	void SetBall(const CRect& pRect, COLORREF color, int nOffX, int nOffY); // zmodyfikowac
 	void SetOffset(int nOffx, int nOffy); // ustawia wektory ruchu
 	void SetBoundRect(const CRect& pRect); // ustawia prostokat ograniczajacy ruch - obszar klienta
@@ -27,8 +27,12 @@ public:
 	CPen* getBallPen();
 	CBrush* getBallBrush();
 
+	int getOffX();
+	int getOffY();
+
+
 private:
-	inline void CreateObjects(COLORREF BallColor = BLACK); 
+	inline void CreateObjects(COLORREF BallColor = BLACK);
 	// kolor pedzla i piora ten sam
 	// CreatePen
 	// CreateSolidBrush
@@ -47,4 +51,3 @@ private:
 	int m_nOffY;
 	std::unique_ptr<CRect> m_BoundRect;
 };
-

@@ -28,13 +28,6 @@ static UINT indicators[] =
 };
 
 // CMainFrame construction/destruction
-UINT CMainFrame::m_KulkiIDs[]
-{
-	ID_DODAJKULKE,
-	ID_USUNKULKE,
-	ID_ANIMACJA,
-	ID_APP_ABOUT,
-};
 
 CMainFrame::CMainFrame()
 {
@@ -45,38 +38,17 @@ CMainFrame::~CMainFrame()
 {
 }
 
-void CMainFrame::ResetButton(BOOL b)
-{
-	int buttonIx = sizeof(m_KulkiIDs) / sizeof(UINT);
-	if (b)
-		m_wndToolBar.SetButtonInfo(2, ID_ANIMACJA, TBBS_BUTTON, buttonIx);
-	else
-		m_wndToolBar.SetButtonInfo(2, ID_ANIMACJA, TBBS_BUTTON, 2);
-
-	m_wndToolBar.Invalidate();
-}
-
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	//if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
-	//	!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
-	//{
-	//	TRACE0("Failed to create toolbar\n");
-	//	return -1;      // fail to create
-	//}
-
-	if (!m_wndToolBar.Create(this) || !m_wndToolBar.LoadBitmapW(IDR_KULKI) || !m_wndToolBar.SetButtons(m_KulkiIDs, sizeof(m_KulkiIDs) / sizeof(UINT)))
+	if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
+		!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
 	{
 		TRACE0("Failed to create toolbar\n");
-		return -1;
+		return -1;      // fail to create
 	}
-
-	CToolBarCtrl& BarCtrl = m_wndToolBar.GetToolBarCtrl();
-	BarCtrl.SetBitmapSize(CSize(25, 20));
-	BarCtrl.SetButtonSize(CSize(30, 32));
 
 	if (!m_wndStatusBar.Create(this))
 	{
