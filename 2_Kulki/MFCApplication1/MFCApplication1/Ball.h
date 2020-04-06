@@ -8,7 +8,7 @@ class CBall : public CRect
 {
 
 public:
-	CBall(int xLeftTop = 0, int yLeftTop = 0, int xRightBottom = 0, int yRightBottom = 0, COLORREF color = BLACK);
+	CBall(int xLeftTop = 0, int yLeftTop = 0, int xRightBottom = 0, int yRightBottom = 0, COLORREF color = BLACK, int nOffX = 3, int nOffY = 3);
 	CBall(const CRect& pRect, COLORREF color = BLACK);
 	CBall(const CPoint& LeftTop, const CSize& size, COLORREF color = BLACK);
 

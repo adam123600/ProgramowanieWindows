@@ -99,6 +99,9 @@ IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 IDR_MAINFRAME TOOLBAR 16, 15
 BEGIN
     BUTTON      ID_START_STOP
+    BUTTON      ID_DODAJKULKE
+    BUTTON      ID_USUNKULKE
+    SEPARATOR
     BUTTON      ID_APP_ABOUT
 END
 
@@ -113,6 +116,8 @@ BEGIN
     POPUP "&Ball"
     BEGIN
         MENUITEM "&Start/Stop",                 ID_START_STOP
+        MENUITEM "DodajKulke",                  ID_DODAJKULKE
+        MENUITEM "UsunKulke",                   ID_USUNKULKE
     END
     POPUP "&Help"
     BEGIN

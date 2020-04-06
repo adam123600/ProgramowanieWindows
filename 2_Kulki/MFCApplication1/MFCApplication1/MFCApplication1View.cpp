@@ -12,6 +12,8 @@
 #include "MFCApplication1Doc.h"
 #include "MFCApplication1View.h"
 
+#include <time.h>
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -27,6 +29,8 @@ BEGIN_MESSAGE_MAP(CMFCApplication1View, CView)
 	ON_WM_DESTROY()
 	ON_WM_TIMER()
 	ON_WM_ERASEBKGND()
+	ON_COMMAND(ID_DODAJKULKE, &CMFCApplication1View::OnDodajkulke)
+	ON_COMMAND(ID_USUNKULKE, &CMFCApplication1View::OnUsunkulke)
 END_MESSAGE_MAP()
 
 void CALLBACK ZfxTimerProc(HWND hWnd, UINT nMsg, UINT nIDEvent, DWORD dwTime)
@@ -40,6 +44,8 @@ void CALLBACK ZfxTimerProc(HWND hWnd, UINT nMsg, UINT nIDEvent, DWORD dwTime)
 CMFCApplication1View::CMFCApplication1View()
 {
 	// TODO: add construction code here
+	srand(time(NULL));
+
 	m_pBall = new CRect(20, 20, 20 + BALLSIZE, 20 + BALLSIZE);
 	m_pBallPen = new CPen(PS_SOLID, 1, RGB(0, 0, 255));
 	m_pBallBrush = new CBrush(RGB(0, 0, 255));
@@ -50,6 +56,7 @@ CMFCApplication1View::CMFCApplication1View()
 	m_bStart = false;
 
 	m_pClientRect = new CRect(0, 0, 0, 0);
+	amountBalls = 0;
 }
 
 CMFCApplication1View::~CMFCApplication1View()
@@ -86,10 +93,9 @@ void CMFCApplication1View::OnDraw(CDC* pDC)
 	//pDC->SelectObject(pOldBrush);
 
 	// ****
-	//CBall b1(20, 20, 100, 100, RGB(255, 0, 0));
-	CBall* b2 = new CBall(20, 20, 100, 100, RGB(255, 0, 0));
-	m_pBalls.push_back(b2);
-	//pDC->Ellipse(m_pBalls[0]);
+	//CBall* b2 = new CBall(20, 20, 100, 100, RGB(255, 0, 0));
+	//m_pBalls.push_back(b2);
+	
 	// ****
 
 	CDC memDC;
@@ -107,13 +113,22 @@ void CMFCApplication1View::OnDraw(CDC* pDC)
 
 	//memDC.Ellipse(m_pBall);
 	
+	for (int i = 0; i < amountBalls; i++)
+	{	
+		pOldPen = memDC.SelectObject(m_pBalls[i]->getBallPen());
+		pOldBrush = memDC.SelectObject(m_pBalls[i]->getBallBrush());
+		memDC.Ellipse(m_pBalls[i]);
+	}
+
+	for (int i = 0; i < amountBalls; i++)
+		bounceBalls(m_pBalls[i]);
 	//memDC.SelectObject(m_pBalls[0]);
 	
-	memDC.Ellipse(m_pBalls[0]);
-	bounceBalls(m_pBalls[0]);
+	//memDC.Ellipse(m_pBalls[0]);
+	//bounceBalls(m_pBalls[0]);
 
-	//memDC.SelectObject(pOldPen);
-	//memDC.SelectObject(pOldBrush);
+	memDC.SelectObject(pOldPen);
+	memDC.SelectObject(pOldBrush);
 
 	b = pDC->BitBlt(0, 0, m_pClientRect->Width(), m_pClientRect->Height(), &memDC, 0, 0, SRCCOPY);
 	ASSERT(b);
@@ -200,8 +215,9 @@ void CMFCApplication1View::OnTimer(UINT_PTR nIDEvent)
 			m_nBallOffY *= -1;*/
 
 		
-		
-		m_pBalls[0]->OffsetRect(5*m_pBalls[0]->getOffX(), 5*m_pBalls[0]->getOffY());
+		//if ( amountBalls > 0)
+		for(int i = 0; i < amountBalls; i++)
+			m_pBalls[i]->OffsetRect(5*m_pBalls[i]->getOffX(), 5*m_pBalls[i]->getOffY());
 
 		Invalidate();
 	}
@@ -253,4 +269,40 @@ void CMFCApplication1View::bounceBalls(CBall * pBall)
 
 	if (pBall->top < m_pClientRect->top)
 		pBall->SetOffset(1, -1);
+}
+
+
+void CMFCApplication1View::OnDodajkulke()
+{
+	// TODO: Add your command handler code here
+	if (amountBalls >= 0 && amountBalls <= 10)
+	{
+		int temp = rand() % 100;
+		CBall* pBall = new CBall(20, 20, 20 + temp, 20 + temp, RGB(rand()%255, rand()%255, rand()%255), 1 + rand()% 10, 1 + rand()%10);
+		//CBall pBall(20, 20, 20 + temp, 20 + temp, RGB(rand() % 255, rand() % 255, rand() % 255), 1 + rand() % 10, 1 + rand() % 10);
+		m_pBalls.push_back(pBall);
+		amountBalls++;
+
+		if (amountBalls > 10)
+			amountBalls = 10;
+	}
+}
+
+
+void CMFCApplication1View::OnUsunkulke()
+{
+	// TODO: Add your command handler code here
+	if (amountBalls > 0 && amountBalls <= 10)
+	{
+		//m_pBalls.pop_back();
+
+		CBall* pBall = m_pBalls.back();
+		delete pBall;
+		m_pBalls.pop_back();
+
+		amountBalls--;
+		
+		if (amountBalls < 0)
+			amountBalls = 0;
+	}
 }

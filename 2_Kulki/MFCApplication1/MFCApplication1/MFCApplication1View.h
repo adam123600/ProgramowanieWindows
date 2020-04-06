@@ -57,6 +57,7 @@ private:
 
 	//
 	std::vector<CBall*> m_pBalls;
+	short int amountBalls;
 
 private:
 	void bounceBalls(CBall* pBall);
@@ -67,6 +68,8 @@ public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	virtual void OnPrepareDC(CDC* pDC, CPrintInfo* pInfo = NULL);
+	afx_msg void OnDodajkulke();
+	afx_msg void OnUsunkulke();
 };
 
 #ifndef _DEBUG  // debug version in MFCApplication1View.cpp

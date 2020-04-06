@@ -3,13 +3,13 @@
 
 #define RED RGB(255, 0, 0)
 
-CBall::CBall(int xLeftTop, int yLeftTop, int xRightBottom, int yRightBottom, COLORREF color)
+CBall::CBall(int xLeftTop, int yLeftTop, int xRightBottom, int yRightBottom, COLORREF color, int nOffX, int nOffY)
 	: CRect(xLeftTop, yLeftTop, xRightBottom, yRightBottom)
 {
 	//m_pBallPen = std::make_unique<CPen>(  ); // w nawiasie parametry
 	InitObjects(color);
-	m_nOffX = 3;
-	m_nOffY = 1;
+	m_nOffX = nOffX;
+	m_nOffY = nOffY;
 }
 
 CBall::CBall(const CRect & pRect, COLORREF color)
