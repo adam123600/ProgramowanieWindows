@@ -194,6 +194,11 @@ void CMFCApplication1View::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: Add your message handler code here and/or call default
 
+	for (int i = 0; i < amountBalls; i++)
+		m_pBalls[i]->OffsetRect(0, 0);
+	Invalidate();
+
+
 	if (m_bStart)
 	{
 		/*if ( m_pBall->bottom >= m_pClientRect->bottom)
