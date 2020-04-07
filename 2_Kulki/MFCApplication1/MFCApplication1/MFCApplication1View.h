@@ -39,25 +39,27 @@ protected:
 protected:
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnStart();
+	afx_msg void OnStartStop();
+	afx_msg void OnDodajkulke();
+	afx_msg void OnUsunkulke();
 
 private:
+	bool m_bStartStopButton;
 	UINT_PTR m_nTimerID;
-
 	CRect* m_pBall;
 	CPen* m_pBallPen;
 	CBrush* m_pBallBrush;
 
+	bool m_bStartAnimation;
+
 	int m_nBallOffX;
 	int m_nBallOffY;
 
-	bool m_bStart;
-
 	CRect* m_pClientRect;
 
-	//
-	std::vector<CBall*> m_pBalls;
 	short int amountBalls;
+
+	std::vector<CBall*> m_pBalls;
 
 private:
 	void bounceBalls(CBall* pBall);
@@ -68,8 +70,6 @@ public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	virtual void OnPrepareDC(CDC* pDC, CPrintInfo* pInfo = NULL);
-	afx_msg void OnDodajkulke();
-	afx_msg void OnUsunkulke();
 };
 
 #ifndef _DEBUG  // debug version in MFCApplication1View.cpp

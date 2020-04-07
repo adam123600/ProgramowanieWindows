@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9CA21E3B-A03E-49F0-84C1-59F34CB0956D}</ProjectGuid>
+    <ProjectGuid>{AC91C995-8331-4A79-A684-795ADFB55EA2}</ProjectGuid>
     <RootNamespace>MFCApplication1</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <Keyword>MFCProj</Keyword>
@@ -211,13 +211,13 @@
     <ResourceCompile Include="MFCApplication1.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
     <None Include="res\MFCApplication1.rc2" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\MFCApplication1.ico" />
     <Image Include="res\MFCApplication1Doc.ico" />
     <Image Include="res\Toolbar.bmp" />
+    <Image Include="res\toolbar1.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

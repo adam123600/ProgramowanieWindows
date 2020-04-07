@@ -11,27 +11,26 @@
 
 #include "MFCApplication1Doc.h"
 #include "MFCApplication1View.h"
-
-#include <time.h>
+#include "MainFrm.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 #define BALLSIZE 60
-
 // CMFCApplication1View
 
 IMPLEMENT_DYNCREATE(CMFCApplication1View, CView)
 
 BEGIN_MESSAGE_MAP(CMFCApplication1View, CView)
-	ON_COMMAND(ID_START_STOP, &CMFCApplication1View::OnStart)
+	ON_COMMAND(ID_START_STOP, &CMFCApplication1View::OnStartStop)
+	ON_COMMAND(ID_DODAJKULKE, &CMFCApplication1View::OnDodajkulke)
+	ON_COMMAND(ID_USUNKULKE, &CMFCApplication1View::OnUsunkulke)
 	ON_WM_DESTROY()
 	ON_WM_TIMER()
 	ON_WM_ERASEBKGND()
-	ON_COMMAND(ID_DODAJKULKE, &CMFCApplication1View::OnDodajkulke)
-	ON_COMMAND(ID_USUNKULKE, &CMFCApplication1View::OnUsunkulke)
 END_MESSAGE_MAP()
+
 
 void CALLBACK ZfxTimerProc(HWND hWnd, UINT nMsg, UINT nIDEvent, DWORD dwTime)
 {
@@ -46,6 +45,9 @@ CMFCApplication1View::CMFCApplication1View()
 	// TODO: add construction code here
 	srand(time(NULL));
 
+	m_bStartStopButton = false;
+	m_bStartAnimation = false;
+
 	m_pBall = new CRect(20, 20, 20 + BALLSIZE, 20 + BALLSIZE);
 	m_pBallPen = new CPen(PS_SOLID, 1, RGB(0, 0, 255));
 	m_pBallBrush = new CBrush(RGB(0, 0, 255));
@@ -53,9 +55,8 @@ CMFCApplication1View::CMFCApplication1View()
 	m_nBallOffX = 3;
 	m_nBallOffY = 1;
 
-	m_bStart = false;
-
 	m_pClientRect = new CRect(0, 0, 0, 0);
+
 	amountBalls = 0;
 }
 
@@ -85,18 +86,9 @@ void CMFCApplication1View::OnDraw(CDC* pDC)
 		return;
 
 	// TODO: add draw code for native data here
-
-	//CPen* pOldPen = pDC->SelectObject(m_pBallPen);
-	//CBrush* pOldBrush = pDC->SelectObject(m_pBallBrush);
-	//pDC->Ellipse(m_pBall);
-	//pDC->SelectObject(pOldPen);
-	//pDC->SelectObject(pOldBrush);
-
-	// ****
-	//CBall* b2 = new CBall(20, 20, 100, 100, RGB(255, 0, 0));
-	//m_pBalls.push_back(b2);
-	
-	// ****
+	/*CPen* pOldPen = pDC->SelectObject(m_pBallPen);
+	CBrush* pOldBrush = pDC->SelectObject(m_pBallBrush);
+	pDC->Ellipse(m_pBall);*/
 
 	CDC memDC;
 	BOOL b = memDC.CreateCompatibleDC(pDC);
@@ -112,9 +104,9 @@ void CMFCApplication1View::OnDraw(CDC* pDC)
 	CBrush* pOldBrush = memDC.SelectObject(m_pBallBrush);
 
 	//memDC.Ellipse(m_pBall);
-	
+
 	for (int i = 0; i < amountBalls; i++)
-	{	
+	{
 		pOldPen = memDC.SelectObject(m_pBalls[i]->getBallPen());
 		pOldBrush = memDC.SelectObject(m_pBalls[i]->getBallBrush());
 		memDC.Ellipse(m_pBalls[i]);
@@ -123,7 +115,7 @@ void CMFCApplication1View::OnDraw(CDC* pDC)
 	for (int i = 0; i < amountBalls; i++)
 		bounceBalls(m_pBalls[i]);
 	//memDC.SelectObject(m_pBalls[0]);
-	
+
 	//memDC.Ellipse(m_pBalls[0]);
 	//bounceBalls(m_pBalls[0]);
 
@@ -163,117 +155,13 @@ CMFCApplication1Doc* CMFCApplication1View::GetDocument() const // non-debug vers
 // CMFCApplication1View message handlers
 
 
-void CMFCApplication1View::OnStart()
+void CMFCApplication1View::OnStartStop()
 {
 	// TODO: Add your command handler code here
-	m_bStart = !m_bStart;
-}
-
-
-
-void CMFCApplication1View::OnInitialUpdate()
-{
-	CView::OnInitialUpdate();
-
-	// TODO: Add your specialized code here and/or call the base class
-	m_nTimerID = SetTimer(WM_USER + 1, 20, ZfxTimerProc);
-}
-
-
-void CMFCApplication1View::OnDestroy()
-{
-	CView::OnDestroy();
-
-	// TODO: Add your message handler code here
-	KillTimer(m_nTimerID);
-	CView::OnDestroy();
-}
-
-
-void CMFCApplication1View::OnTimer(UINT_PTR nIDEvent)
-{
-	// TODO: Add your message handler code here and/or call default
-
-	for (int i = 0; i < amountBalls; i++)
-		m_pBalls[i]->OffsetRect(0, 0);
-	Invalidate();
-
-
-	if (m_bStart)
-	{
-		/*if ( m_pBall->bottom >= m_pClientRect->bottom)
-			m_pBall->OffsetRect(-3*(m_nBallOffX), -3*(m_nBallOffY+5));
-		else
-			m_pBall->OffsetRect(3*m_nBallOffX, 3*m_nBallOffY);
-		*/
-		
-		/*if (m_pBall->right >= m_pClientRect->right)
-			m_nBallOffX *= -1;
-
-		if (m_pBall->bottom >= m_pClientRect->bottom)
-			m_nBallOffY *= -1;
-
-		if (m_pBall->left < m_pClientRect->left)
-			m_nBallOffX *= -1;
-
-		if (m_pBall->top < m_pClientRect->top )
-			m_nBallOffY *= -1;*/
-
-		
-		//if ( amountBalls > 0)
-		for(int i = 0; i < amountBalls; i++)
-			m_pBalls[i]->OffsetRect(5*m_pBalls[i]->getOffX(), 5*m_pBalls[i]->getOffY());
-
-		Invalidate();
-	}
-
-	CView::OnTimer(nIDEvent);
-}
-
-
-BOOL CMFCApplication1View::OnEraseBkgnd(CDC* pDC)
-{
-	// TODO: Add your message handler code here and/or call default
-
-	//return CView::OnEraseBkgnd(pDC);
-	return 1;
-}
-
-
-void CMFCApplication1View::OnPrepareDC(CDC* pDC, CPrintInfo* pInfo)
-{
-	// TODO: Add your specialized code here and/or call the base class
-	GetClientRect(m_pClientRect);
-
-	CView::OnPrepareDC(pDC, pInfo);
-}
-
-
-void CMFCApplication1View::bounceBalls(CBall * pBall)
-{/*
-	if (m_pBall->right >= m_pClientRect->right)
-		m_nBallOffX *= -1;
-
-	if (m_pBall->bottom >= m_pClientRect->bottom)
-		m_nBallOffY *= -1;
-
-	if (m_pBall->left < m_pClientRect->left)
-		m_nBallOffX *= -1;
-
-	if (m_pBall->top < m_pClientRect->top)
-		m_nBallOffY *= -1;*/
-
-	if (pBall->right >= m_pClientRect->right)
-		pBall->SetOffset(-1, 1);
-
-	if (pBall->bottom >= m_pClientRect->bottom)
-		pBall->SetOffset(1, -1);
-
-	if (pBall->left < m_pClientRect->left)
-		pBall->SetOffset(-1, 1);
-
-	if (pBall->top < m_pClientRect->top)
-		pBall->SetOffset(1, -1);
+	m_bStartStopButton = !m_bStartStopButton;
+	m_bStartAnimation = !m_bStartAnimation;
+	CMainFrame* pFrame = (CMainFrame*)GetParentFrame();
+	pFrame->ResetButton(m_bStartStopButton);
 }
 
 
@@ -283,7 +171,7 @@ void CMFCApplication1View::OnDodajkulke()
 	if (amountBalls >= 0 && amountBalls < 10)
 	{
 		int temp = rand() % 100;
-		CBall* pBall = new CBall(20, 20, 20 + temp, 20 + temp, RGB(rand()%255, rand()%255, rand()%255), 1 + rand()% 10, 1 + rand()%10);
+		CBall* pBall = new CBall(20, 20, 20 + temp, 20 + temp, RGB(rand() % 255, rand() % 255, rand() % 255), 1 + rand() % 10, 1 + rand() % 10);
 		//CBall pBall(20, 20, 20 + temp, 20 + temp, RGB(rand() % 255, rand() % 255, rand() % 255), 1 + rand() % 10, 1 + rand() % 10);
 		m_pBalls.push_back(pBall);
 		amountBalls++;
@@ -306,8 +194,110 @@ void CMFCApplication1View::OnUsunkulke()
 		m_pBalls.pop_back();
 
 		amountBalls--;
-		
+
 		if (amountBalls < 0)
 			amountBalls = 0;
 	}
 }
+
+
+void CMFCApplication1View::OnInitialUpdate()
+{
+	CView::OnInitialUpdate();
+
+	// TODO: Add your specialized code here and/or call the base class
+	m_nTimerID = SetTimer(WM_USER + 1, 20, ZfxTimerProc);
+}
+
+
+void CMFCApplication1View::OnDestroy()
+{
+	KillTimer(m_nTimerID);
+	CView::OnDestroy();
+
+	// TODO: Add your message handler code here
+}
+
+
+void CMFCApplication1View::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: Add your message handler code here and/or call default
+	for (int i = 0; i < amountBalls; i++)
+		m_pBalls[i]->OffsetRect(0, 0);
+	Invalidate();
+
+
+	if (m_bStartAnimation)
+	{
+		/*if ( m_pBall->bottom >= m_pClientRect->bottom)
+		m_pBall->OffsetRect(-3*(m_nBallOffX), -3*(m_nBallOffY+5));
+		else
+		m_pBall->OffsetRect(3*m_nBallOffX, 3*m_nBallOffY);
+		*/
+
+		/*if (m_pBall->right >= m_pClientRect->right)
+		m_nBallOffX *= -1;
+
+		if (m_pBall->bottom >= m_pClientRect->bottom)
+		m_nBallOffY *= -1;
+
+		if (m_pBall->left < m_pClientRect->left)
+		m_nBallOffX *= -1;
+
+		if (m_pBall->top < m_pClientRect->top )
+		m_nBallOffY *= -1;*/
+
+
+		//if ( amountBalls > 0)
+		for (int i = 0; i < amountBalls; i++)
+			m_pBalls[i]->OffsetRect(5 * m_pBalls[i]->getOffX(), 5 * m_pBalls[i]->getOffY());
+
+		Invalidate();
+	}
+
+	CView::OnTimer(nIDEvent);
+}
+
+
+BOOL CMFCApplication1View::OnEraseBkgnd(CDC* pDC)
+{
+	// TODO: Add your message handler code here and/or call default
+	return 1;
+	//return CView::OnEraseBkgnd(pDC);
+}
+
+
+void CMFCApplication1View::OnPrepareDC(CDC* pDC, CPrintInfo* pInfo)
+{
+	// TODO: Add your specialized code here and/or call the base class
+	GetClientRect(m_pClientRect);
+	CView::OnPrepareDC(pDC, pInfo);
+}
+
+void CMFCApplication1View::bounceBalls(CBall * pBall)
+{/*
+ if (m_pBall->right >= m_pClientRect->right)
+ m_nBallOffX *= -1;
+
+ if (m_pBall->bottom >= m_pClientRect->bottom)
+ m_nBallOffY *= -1;
+
+ if (m_pBall->left < m_pClientRect->left)
+ m_nBallOffX *= -1;
+
+ if (m_pBall->top < m_pClientRect->top)
+ m_nBallOffY *= -1;*/
+
+	if (pBall->right >= m_pClientRect->right)
+		pBall->SetOffset(-1, 1);
+
+	if (pBall->bottom >= m_pClientRect->bottom)
+		pBall->SetOffset(1, -1);
+
+	if (pBall->left < m_pClientRect->left)
+		pBall->SetOffset(-1, 1);
+
+	if (pBall->top < m_pClientRect->top)
+		pBall->SetOffset(1, -1);
+}
+

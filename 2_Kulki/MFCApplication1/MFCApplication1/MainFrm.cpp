@@ -27,6 +27,15 @@ static UINT indicators[] =
 	ID_INDICATOR_SCRL,
 };
 
+UINT CMainFrame::m_buttonsIDs[]
+{
+	ID_START_STOP,
+	ID_DODAJKULKE,
+	ID_USUNKULKE,
+	ID_APP_ABOUT,
+
+};
+
 // CMainFrame construction/destruction
 
 CMainFrame::CMainFrame()
@@ -38,17 +47,37 @@ CMainFrame::~CMainFrame()
 {
 }
 
+void CMainFrame::ResetButton(BOOL b)
+{
+	int buttonIx = sizeof(m_buttonsIDs) / sizeof(UINT);
+	if (b)
+		m_wndToolBar.SetButtonInfo(0, ID_START_STOP, TBBS_BUTTON, buttonIx);
+	else
+		m_wndToolBar.SetButtonInfo(0, ID_START_STOP, TBBS_BUTTON, 0);
+
+	m_wndToolBar.Invalidate();
+}
+
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
-		!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
+	//if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
+	//	!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
+	//{
+	//	TRACE0("Failed to create toolbar\n");
+	//	return -1;      // fail to create
+	//}
+	//
+
+	if (!m_wndToolBar.Create(this) || !m_wndToolBar.LoadBitmapW(IDR_KULKI)
+		|| !m_wndToolBar.SetButtons(m_buttonsIDs, sizeof(m_buttonsIDs) / sizeof(UINT)))
 	{
 		TRACE0("Failed to create toolbar\n");
-		return -1;      // fail to create
+		return -1;
 	}
+
 
 	if (!m_wndStatusBar.Create(this))
 	{

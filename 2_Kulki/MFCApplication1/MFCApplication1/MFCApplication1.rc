@@ -60,6 +60,29 @@ END
 
 #endif    // APSTUDIO_INVOKED
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_KULKI               BITMAP                  "res\\toolbar1.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_KULKI TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_START_STOP
+    BUTTON      ID_DODAJKULKE
+    BUTTON      ID_USUNKULKE
+    BUTTON      ID_APP_ABOUT
+    BUTTON      ID_BUTTON32782
+END
+
 #endif    // Polish (Poland) resources
 /////////////////////////////////////////////////////////////////////////////
 
@@ -98,10 +121,15 @@ IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 
 IDR_MAINFRAME TOOLBAR 16, 15
 BEGIN
-    BUTTON      ID_START_STOP
-    BUTTON      ID_DODAJKULKE
-    BUTTON      ID_USUNKULKE
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
     SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
     BUTTON      ID_APP_ABOUT
 END
 
@@ -113,9 +141,9 @@ END
 
 IDR_MAINFRAME MENU
 BEGIN
-    POPUP "&Ball"
+    POPUP "Ball"
     BEGIN
-        MENUITEM "&Start/Stop",                 ID_START_STOP
+        MENUITEM "Start/Stop",                  ID_START_STOP
         MENUITEM "DodajKulke",                  ID_DODAJKULKE
         MENUITEM "UsunKulke",                   ID_USUNKULKE
     END
