@@ -275,7 +275,7 @@ void CMFCApplication1View::bounceBalls(CBall * pBall)
 void CMFCApplication1View::OnDodajkulke()
 {
 	// TODO: Add your command handler code here
-	if (amountBalls >= 0 && amountBalls <= 10)
+	if (amountBalls >= 0 && amountBalls < 10)
 	{
 		int temp = rand() % 100;
 		CBall* pBall = new CBall(20, 20, 20 + temp, 20 + temp, RGB(rand()%255, rand()%255, rand()%255), 1 + rand()% 10, 1 + rand()%10);
