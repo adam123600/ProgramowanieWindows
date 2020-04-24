@@ -11,6 +11,7 @@
 
 #include "KwiaciarniaDoc.h"
 #include "KwiaciarniaView.h"
+#include "KwiaciarniaDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -22,6 +23,7 @@
 IMPLEMENT_DYNCREATE(CKwiaciarniaView, CView)
 
 BEGIN_MESSAGE_MAP(CKwiaciarniaView, CView)
+	ON_COMMAND(ID_KWIACIARNIA, &CKwiaciarniaView::OnKwiaciarnia)
 END_MESSAGE_MAP()
 
 // CKwiaciarniaView construction/destruction
@@ -79,3 +81,11 @@ CKwiaciarniaDoc* CKwiaciarniaView::GetDocument() const // non-debug version is i
 
 
 // CKwiaciarniaView message handlers
+
+
+void CKwiaciarniaView::OnKwiaciarnia()
+{
+	// TODO: Add your command handler code here
+	CKwiaciarniaDialog dlg;
+	dlg.DoModal();
+}

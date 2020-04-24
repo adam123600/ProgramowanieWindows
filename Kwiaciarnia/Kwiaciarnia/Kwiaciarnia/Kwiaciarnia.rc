@@ -80,7 +80,7 @@ BEGIN
     LTEXT           "Rabat:",IDC_STATIC,26,93,22,9
     EDITTEXT        IDC_RABAT,52,92,38,12,ES_AUTOHSCROLL | ES_NUMBER | NOT WS_BORDER,WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE
     GROUPBOX        "Kwiaty/Iloœæ",IDC_STATIC,19,21,107,63,0,WS_EX_DLGMODALFRAME
-    CONTROL         "Folia (2z³)",IDC_OPAKOWANIE_FOLIA,"Button",BS_AUTORADIOBUTTON,147,35,47,10
+    CONTROL         "Folia (2z³)",IDC_OPAKOWANIE_FOLIA,"Button",BS_AUTORADIOBUTTON | WS_GROUP,147,35,47,10
     CONTROL         "Papier (1z³)",IDC_OPAKOWANIE_PAPIER,"Button",BS_AUTORADIOBUTTON,147,51,50,10
     CONTROL         "Brak",IDC_OPAKOWANIE_BRAK,"Button",BS_AUTORADIOBUTTON,147,67,31,10
     GROUPBOX        "Rodzaj opakowania",IDC_STATIC,136,21,81,63,0,WS_EX_DLGMODALFRAME
@@ -90,6 +90,7 @@ BEGIN
     LTEXT           "",IDC_NALEZNOSC,76,143,103,8,SS_SUNKEN
     CONTROL         IDR_KWIATEK_TOOLBAR2,IDC_KWIATEK_TOOLB,"Static",SS_BITMAP | SS_SUNKEN,207,138,21,19,WS_EX_CLIENTEDGE
     CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT,15,125,273,9
+    LTEXT           "%",IDC_STATIC,92,93,8,10,SS_SUNKEN | WS_BORDER,WS_EX_STATICEDGE
 END
 
 
@@ -215,16 +216,8 @@ IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 
 IDR_MAINFRAME TOOLBAR 16, 15
 BEGIN
-    BUTTON      ID_FILE_NEW
-    BUTTON      ID_FILE_OPEN
-    BUTTON      ID_FILE_SAVE
-    SEPARATOR
-    BUTTON      ID_EDIT_CUT
-    BUTTON      ID_EDIT_COPY
-    BUTTON      ID_EDIT_PASTE
-    SEPARATOR
-    BUTTON      ID_FILE_PRINT
     BUTTON      ID_APP_ABOUT
+    BUTTON      ID_KWIACIARNIA
 END
 
 
@@ -235,33 +228,13 @@ END
 
 IDR_MAINFRAME MENU
 BEGIN
-    POPUP "&File"
-    BEGIN
-        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
-        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
-        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
-        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
-        MENUITEM SEPARATOR
-        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
-        MENUITEM SEPARATOR
-        MENUITEM "E&xit",                       ID_APP_EXIT
-    END
-    POPUP "&Edit"
-    BEGIN
-        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
-        MENUITEM SEPARATOR
-        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
-        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
-        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
-    END
-    POPUP "&View"
-    BEGIN
-        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
-        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
-    END
     POPUP "&Help"
     BEGIN
         MENUITEM "&About Kwiaciarnia...",       ID_APP_ABOUT
+    END
+    POPUP "Kwiaciarnia"
+    BEGIN
+        MENUITEM "Wlacz Kwiaciarnie",           ID_KWIACIARNIA
     END
 END
 
