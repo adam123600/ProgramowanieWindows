@@ -88,5 +88,8 @@ void CMFCApplication1View::OnDlgTest()
 {
 	// TODO: Add your command handler code here
 	CTestDlg dlg;
-	dlg.DoModal();
+	if (dlg.DoModal() == IDOK)
+		AfxMessageBox(L"Ustawienia w oknie dialogowym zaakceptowane!");
+	else
+		AfxMessageBox(L"Rezygnacja z ustawieñ");
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "afxwin.h"
+#include "afxcmn.h"
 
 
 // CTestDlg dialog
@@ -30,4 +31,9 @@ private:
 	BOOL m_bSecond;
 	BOOL m_bthird;
 	int m_nLectureKind;
+public:
+	virtual BOOL OnInitDialog();
+	afx_msg void OnGenerRandom();
+	afx_msg void OnOK();
+	CSpinButtonCtrl m_Spin;
 };
