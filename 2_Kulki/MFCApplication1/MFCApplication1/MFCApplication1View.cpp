@@ -29,6 +29,7 @@ BEGIN_MESSAGE_MAP(CMFCApplication1View, CView)
 	ON_WM_DESTROY()
 	ON_WM_TIMER()
 	ON_WM_ERASEBKGND()
+	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 
@@ -85,11 +86,6 @@ void CMFCApplication1View::OnDraw(CDC* pDC)
 	if (!pDoc)
 		return;
 
-	// TODO: add draw code for native data here
-	/*CPen* pOldPen = pDC->SelectObject(m_pBallPen);
-	CBrush* pOldBrush = pDC->SelectObject(m_pBallBrush);
-	pDC->Ellipse(m_pBall);*/
-
 	CDC memDC;
 	BOOL b = memDC.CreateCompatibleDC(pDC);
 	ASSERT(b);
@@ -103,7 +99,6 @@ void CMFCApplication1View::OnDraw(CDC* pDC)
 	CPen* pOldPen = memDC.SelectObject(m_pBallPen);
 	CBrush* pOldBrush = memDC.SelectObject(m_pBallBrush);
 
-	//memDC.Ellipse(m_pBall);
 
 	for (int i = 0; i < amountBalls; i++)
 	{
@@ -111,13 +106,6 @@ void CMFCApplication1View::OnDraw(CDC* pDC)
 		pOldBrush = memDC.SelectObject(m_pBalls[i]->getBallBrush());
 		memDC.Ellipse(m_pBalls[i]);
 	}
-
-	for (int i = 0; i < amountBalls; i++)
-		bounceBalls(m_pBalls[i]);
-	//memDC.SelectObject(m_pBalls[0]);
-
-	//memDC.Ellipse(m_pBalls[0]);
-	//bounceBalls(m_pBalls[0]);
 
 	memDC.SelectObject(pOldPen);
 	memDC.SelectObject(pOldBrush);
@@ -172,7 +160,6 @@ void CMFCApplication1View::OnDodajkulke()
 	{
 		int temp = rand() % 100;
 		CBall* pBall = new CBall(20, 20, 20 + temp, 20 + temp, RGB(rand() % 255, rand() % 255, rand() % 255), 1 + rand() % 10, 1 + rand() % 10);
-		//CBall pBall(20, 20, 20 + temp, 20 + temp, RGB(rand() % 255, rand() % 255, rand() % 255), 1 + rand() % 10, 1 + rand() % 10);
 		m_pBalls.push_back(pBall);
 		amountBalls++;
 
@@ -187,8 +174,6 @@ void CMFCApplication1View::OnUsunkulke()
 	// TODO: Add your command handler code here
 	if (amountBalls > 0 && amountBalls <= 10)
 	{
-		//m_pBalls.pop_back();
-
 		CBall* pBall = m_pBalls.back();
 		delete pBall;
 		m_pBalls.pop_back();
@@ -222,35 +207,18 @@ void CMFCApplication1View::OnDestroy()
 void CMFCApplication1View::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: Add your message handler code here and/or call default
+
 	for (int i = 0; i < amountBalls; i++)
 		m_pBalls[i]->OffsetRect(0, 0);
 	Invalidate();
 
-
 	if (m_bStartAnimation)
 	{
-		/*if ( m_pBall->bottom >= m_pClientRect->bottom)
-		m_pBall->OffsetRect(-3*(m_nBallOffX), -3*(m_nBallOffY+5));
-		else
-		m_pBall->OffsetRect(3*m_nBallOffX, 3*m_nBallOffY);
-		*/
-
-		/*if (m_pBall->right >= m_pClientRect->right)
-		m_nBallOffX *= -1;
-
-		if (m_pBall->bottom >= m_pClientRect->bottom)
-		m_nBallOffY *= -1;
-
-		if (m_pBall->left < m_pClientRect->left)
-		m_nBallOffX *= -1;
-
-		if (m_pBall->top < m_pClientRect->top )
-		m_nBallOffY *= -1;*/
-
-
-		//if ( amountBalls > 0)
 		for (int i = 0; i < amountBalls; i++)
-			m_pBalls[i]->OffsetRect(5 * m_pBalls[i]->getOffX(), 5 * m_pBalls[i]->getOffY());
+		{
+			m_pBalls[i]->OffsetRect(5*m_pBalls[i]->getOffX(), 5*m_pBalls[i]->getOffY());
+			bounceBalls(m_pBalls[i]);
+		}
 
 		Invalidate();
 	}
@@ -275,29 +243,41 @@ void CMFCApplication1View::OnPrepareDC(CDC* pDC, CPrintInfo* pInfo)
 }
 
 void CMFCApplication1View::bounceBalls(CBall * pBall)
-{/*
- if (m_pBall->right >= m_pClientRect->right)
- m_nBallOffX *= -1;
+{
+	GetClientRect(m_pClientRect);
 
- if (m_pBall->bottom >= m_pClientRect->bottom)
- m_nBallOffY *= -1;
-
- if (m_pBall->left < m_pClientRect->left)
- m_nBallOffX *= -1;
-
- if (m_pBall->top < m_pClientRect->top)
- m_nBallOffY *= -1;*/
-
+	int nOffX = 1;
+	int nOffY = 1;
 	if (pBall->right >= m_pClientRect->right)
-		pBall->SetOffset(-1, 1);
+	{
+		pBall->SetOffset(-nOffX, nOffY);
+		pBall->MoveToX(m_pClientRect->right - pBall->Size().cx);
+	}
+	else if (pBall->left <= m_pClientRect->left)
+	{
+		pBall->SetOffset(-nOffX, nOffY);
+		pBall->MoveToX(0);
+	}
 
 	if (pBall->bottom >= m_pClientRect->bottom)
-		pBall->SetOffset(1, -1);
-
-	if (pBall->left < m_pClientRect->left)
-		pBall->SetOffset(-1, 1);
-
-	if (pBall->top < m_pClientRect->top)
-		pBall->SetOffset(1, -1);
+	{
+		pBall->SetOffset(nOffX, -nOffY);
+		pBall->MoveToY(m_pClientRect->bottom - pBall->Size().cy);
+	}
+	else if (pBall->top <= m_pClientRect->top)
+	{
+		pBall->SetOffset(nOffX, -nOffY);
+		pBall->MoveToY(0);
+	}
 }
 
+
+
+void CMFCApplication1View::OnSize(UINT nType, int cx, int cy)
+{
+	CView::OnSize(nType, cx, cy);
+	GetClientRect(m_pClientRect);
+
+	for (int i = 0; i < amountBalls; i++)
+		bounceBalls(m_pBalls[i]);
+}
